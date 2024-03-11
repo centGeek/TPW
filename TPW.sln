@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34622.214
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPW", "TPW\TPW.csproj", "{8525BD10-4776-4578-A414-842F47191C5F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPWTest", "TPWTest\TPWTest.csproj", "{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8525BD10-4776-4578-A414-842F47191C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8525BD10-4776-4578-A414-842F47191C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8525BD10-4776-4578-A414-842F47191C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8525BD10-4776-4578-A414-842F47191C5F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CD83B765-93F7-4A54-AA20-4A1B718B3D1C}
+	EndGlobalSection
+EndGlobal
