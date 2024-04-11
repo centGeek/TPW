@@ -3,9 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPW", "TPW\TPW.csproj", "{8525BD10-4776-4578-A414-842F47191C5F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPWTest", "TPWTest\TPWTest.csproj", "{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TPW", "TPW\TPW.csproj", "{A90D7DD3-0516-4CB6-97BD-E4E421E45044}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,19 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{8525BD10-4776-4578-A414-842F47191C5F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8525BD10-4776-4578-A414-842F47191C5F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8525BD10-4776-4578-A414-842F47191C5F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8525BD10-4776-4578-A414-842F47191C5F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D1BA967-37C4-4CA9-9C30-38AEFE6178DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A90D7DD3-0516-4CB6-97BD-E4E421E45044}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A90D7DD3-0516-4CB6-97BD-E4E421E45044}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A90D7DD3-0516-4CB6-97BD-E4E421E45044}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A90D7DD3-0516-4CB6-97BD-E4E421E45044}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {CD83B765-93F7-4A54-AA20-4A1B718B3D1C}
+		SolutionGuid = {A483E683-DBD2-477E-8FA6-9E9F199F41CF}
 	EndGlobalSection
 EndGlobal
