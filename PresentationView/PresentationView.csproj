@@ -9,13 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ViewModel\PresentationViewModel.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Compile Update="MainWindow.xaml.cs">
-      <SubType>Code</SubType>
-    </Compile>
+    <ProjectReference Include="..\PresentationViewModel\PresentationViewModel.csproj" />
   </ItemGroup>
 
 </Project>
