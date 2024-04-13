@@ -11,16 +11,19 @@ namespace Data
     public abstract class BallAPI : INotifyPropertyChanged
     {
         public abstract Vector2 getPosition();
-        public abstract void setPosition(Vector2 value);
-        public abstract void setSpeed(Vector2 value);
+        public abstract void setPosition(float x, float y);
+        public abstract void setSpeed(float x, float y);
         public abstract Vector2 getSpeed();
         public abstract int getR();
 
+
         public event PropertyChangedEventHandler? PropertyChanged;
 
-        public BallAPI createBall(int id, float X, float Y, int radius)
+        public abstract BallAPI createBall(float X, float Y, int radius);
+
+        public void RaisePropertyChanged(string v)
         {
-            return new Ball(new Vector2(X, Y), radius); 
+            throw new NotImplementedException();
         }
     }
 

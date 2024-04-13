@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Numerics;
-
-namespace Data
+using Data;
+namespace Logic
 {
     public class Board
     {
@@ -27,7 +27,6 @@ namespace Data
             }
         }
 
-        // Getter i setter dla Height
         public int GetHeight()
         {
             return _height;
@@ -38,7 +37,6 @@ namespace Data
             _height = height;
         }
 
-        // Getter i setter dla Width
         public int GetWidth()
         {
             return _width;
@@ -48,11 +46,23 @@ namespace Data
         {
             _width = width;
         }
-
-        // Getter dla Balls
         public List<Ball> GetBalls()
         {
             return _balls;
         }
+    //public void checkBorderCollision()
+   // {
+     //   foreach (BallAPI ball in _balls)
+       // {
+         //   if (ball.getPosition().X + ball.getR() >= this.X || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= this._width)
+          //  {
+           //     board.(ball);
+            //    Logic.updatePosition(ball);
+           // }
+            //if (ball.y + ball.getSize() >= this.sizeY || ball.y + ball.getYVelocity() + ball.getSize() >= this.sizeY)
+            //{
+             //   Logic.changeYdirection(ball);
+              //  Logic.updatePosition(ball);
+            //}
+        //}
     }
-}

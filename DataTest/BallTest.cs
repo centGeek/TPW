@@ -18,12 +18,11 @@ namespace DataTest
             Assert.AreEqual(new Vector2(3,5), ball.getPosition());
             Assert.AreEqual(3, ball.getR());
 
-            ball.setSpeed(new Vector2(3,2));
-            ball.setPosition(new Vector2(5, 10)); 
+            ball.setSpeed(3,2 );
+            ball.setPosition(5,10); 
 
             Assert.AreEqual(new Vector2(5,10), ball.getPosition());
             Assert.AreEqual(new Vector2(3,2), ball.getSpeed());
-
         }
     }
 }

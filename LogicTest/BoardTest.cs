@@ -1,4 +1,4 @@
-using Data;
+using Logic;
 namespace DataTest
 {
     [TestClass]
@@ -16,7 +16,6 @@ namespace DataTest
 
             Assert.AreEqual(5, board.GetHeight());
             Assert.AreEqual(8, board.GetWidth());
-
         }
     }
 }

@@ -14,18 +14,18 @@ namespace Data
         {
              return _position;
         }
-        public override void setPosition(Vector2 position)
+        public override void setPosition(float x, float y)
         {
-            _position= position;
+            _position= new Vector2(x, y);
         }
         public override Vector2 getSpeed()
         {
             return _speed; 
         }
 
-        public override void setSpeed(Vector2 position)
+        public override void setSpeed(float x, float y)
         {
-            _speed = position; 
+            _speed = new Vector2(x, y); 
         }
         
         public override int getR()
@@ -39,13 +39,16 @@ namespace Data
             _position = position;
             _speed = new Vector2(0, 0);
             _r = r;
-            PropertyChanged += (sender, args) => { };
         }
 
         public void MakeMove()
         {
             _position += _speed;
             OnPropertyChanged(nameof(_position));
+        }
+        public override BallAPI createBall(float X, float Y, int radius)
+        {
+            return new Ball(new Vector2(X, Y), radius); 
         }
 
 
