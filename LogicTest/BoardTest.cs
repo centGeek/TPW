@@ -17,5 +17,11 @@ namespace DataTest
             Assert.AreEqual(5, board.GetHeight());
             Assert.AreEqual(8, board.GetWidth());
         }
+        [TestMethod]
+
+        public void initializeBoard()
+        {
+
+        }
     }
 }

@@ -7,7 +7,7 @@ namespace Logic
     public class Board
     {
         private int _height { get; set; }
-        private int _width { get; set;  }
+        private int _width { get; set; }
         private List<Ball> _balls { get; set; }
 
         public Board(int height, int width)
@@ -19,7 +19,7 @@ namespace Logic
 
         public void FillBallList(int ballsQuantity, int ballRadius)
         {
-            Random random = new Random();
+            Random random = new R```andom();
             for (int i = 0; i < ballsQuantity; i++)
             {
                 Vector2 vector = new Vector2(random.Next(ballRadius, _width - ballRadius), random.Next(ballRadius, _height - ballRadius));
@@ -50,19 +50,22 @@ namespace Logic
         {
             return _balls;
         }
-    //public void checkBorderCollision()
-   // {
-     //   foreach (BallAPI ball in _balls)
-       // {
-         //   if (ball.getPosition().X + ball.getR() >= this.X || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= this._width)
-          //  {
-           //     board.(ball);
-            //    Logic.updatePosition(ball);
-           // }
-            //if (ball.y + ball.getSize() >= this.sizeY || ball.y + ball.getYVelocity() + ball.getSize() >= this.sizeY)
-            //{
-             //   Logic.changeYdirection(ball);
-              //  Logic.updatePosition(ball);
-            //}
-        //}
+        public void checkBorderCollision()
+        {
+            LogicAPI logicAPI = new Logic(); 
+            foreach (BallAPI ball in _balls)
+            {
+                if (ball.getPosition().X + ball.getR() >= this._width || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= this._width || ball.getPosition().X + ball.getR() >= 0|| ball.getPosition().X + ball.getSpeed().X + ball.getR() >= 0)
+                {
+                    logicAPI.changeXdirection(ball); 
+                    logicAPI.updatePosition(ball);
+                }
+                if (ball.getPosition().Y + ball.getR() >= this._height || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= this.GetHeight() || ball.getPosition().Y + ball.getR() >= 0|| ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= 0)
+                {
+                    logicAPI.changeYdirection(ball);
+                    logicAPI.updatePosition(ball);
+                }
+            }
+
+        }
     }
