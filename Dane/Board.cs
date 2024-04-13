@@ -1,40 +1,58 @@
-﻿using Logic;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Logic
+namespace Data
 {
     public class Board
     {
-        private int height { get;  } 
-        private int width { get; }
+        private int _height { get; set; }
+        private int _width { get; set;  }
+        private List<Ball> _balls { get; set; }
 
-        private List<Ball> balls = new List<Ball>();
-
-        public List<Ball> Balls
+        public Board(int height, int width)
         {
-            get { return balls; }
+            _height = height;
+            _width = width;
+            _balls = new List<Ball>();
         }
 
-        public Board(int height, int width) 
-        {
-            this.height = height;
-            this.width = width;
-        }
-
-        public void fillBallList(int ballsQuantity, int ballRadius)
+        public void FillBallList(int ballsQuantity, int ballRadius)
         {
             Random random = new Random();
-            for(int i=0; i < ballsQuantity; i++)
+            for (int i = 0; i < ballsQuantity; i++)
             {
-                Vector2 vector = new Vector2(random.Next(ballRadius, this.width - ballRadius), random.Next(ballRadius, this.height - ballRadius));
-                balls.Add(new Ball(vector, ballRadius)); 
-
+                Vector2 vector = new Vector2(random.Next(ballRadius, _width - ballRadius), random.Next(ballRadius, _height - ballRadius));
+                _balls.Add(new Ball(vector, ballRadius));
             }
+        }
+
+        // Getter i setter dla Height
+        public int GetHeight()
+        {
+            return _height;
+        }
+
+        public void SetHeight(int height)
+        {
+            _height = height;
+        }
+
+        // Getter i setter dla Width
+        public int GetWidth()
+        {
+            return _width;
+        }
+
+        public void SetWidth(int width)
+        {
+            _width = width;
+        }
+
+        // Getter dla Balls
+        public List<Ball> GetBalls()
+        {
+            return _balls;
         }
     }
 }
