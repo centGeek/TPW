@@ -85,8 +85,8 @@ namespace Logic
         public override void checkBorderCollision(Object s, DataEventArgs e)
         {
             BallAPI ball = (BallAPI)s;
-            bool isCorrectInX = (ball.getPosition().X + ball.getR() + ball.getSpeed().X < _maxX - 2 * ball.getR()) && (ball.getPosition().X + ball.getSpeed().X - ball.getR() > 0);
-            bool isCorrectInY = (ball.getPosition().Y + ball.getR() + ball.getSpeed().Y < _maxY - 2 * ball.getR()) && (ball.getPosition().Y + ball.getSpeed().Y - ball.getR() > 0);
+            bool isCorrectInX = (ball.getPosition().X + ball.getR() + ball.getSpeed().X < _maxX /*- 2 * ball.getR()*/) && (ball.getPosition().X + ball.getSpeed().X /*- ball.getR()*/ > 0);
+            bool isCorrectInY = (ball.getPosition().Y + ball.getR() + ball.getSpeed().Y < _maxY /*- 2 * ball.getR()*/) && (ball.getPosition().Y + ball.getSpeed().Y /*- ball.getR()*/ > 0);
             if (!isCorrectInX)
             {
                 ball.setSpeed(-ball.getSpeed().X, ball.getSpeed().Y);
@@ -107,12 +107,12 @@ namespace Logic
             isMoving = true;
             Task.Run(() =>
             {
-                for (int i = 0; i < 10; i++)
+                while (isMoving)
                 {
                     foreach (BallAPI kula in ballAPIs)
                     {
-                        kula.MakeMove();
-                        Thread.Sleep(10);
+                        kula.MakeMove(_maxX, _maxY);
+                        Thread.Sleep(3);
                     }
                 }
             });

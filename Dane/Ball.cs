@@ -10,7 +10,7 @@ namespace Data
         private int _r { get; set; }
 
         private int _maxX = 370;
-        private int _maxY = 370; 
+        private int _maxY = 370;
 
         public override Vector2 getPosition()
         {
@@ -53,12 +53,12 @@ namespace Data
         // (0, 350), (0,350)
 
         {
-            bool isCorrectInX = (this.getPosition().X + this.getR() + this.getSpeed().X < _maxX - 2 * getR()) && (this.getPosition().X + this.getSpeed().X - this.getR() > 0);
-            bool isCorrectInY = (this.getPosition().Y + this.getR() + this.getSpeed().Y < _maxY - 2 * getR()) && (this.getPosition().Y + this.getSpeed().Y - this.getR() > 0);
+            bool isCorrectInX = (this.getPosition().X + this.getR() + this.getSpeed().X < _maxX /*- 2 * getR()*/) && (this.getPosition().X + this.getSpeed().X /*- this.getR()*/ > 0);
+            bool isCorrectInY = (this.getPosition().Y + this.getR() + this.getSpeed().Y < _maxY /*- 2 * getR()*/) && (this.getPosition().Y + this.getSpeed().Y /*- this.getR()*/ > 0);
             if (!isCorrectInX)
             {
                 this.setSpeed(-this.getSpeed().X, this.getSpeed().Y);
-                Debug.WriteLine(this.getPosition()); 
+                //Debug.WriteLine(this.getPosition());
 
             }
             if (!isCorrectInY)

@@ -106,15 +106,15 @@ namespace PresentationViewModel
             CommandSubtractOneToNumOfBalls = new RelayCommand(SubtractOneToNumOfBalls);
             CommandStartTheSimulation = new RelayCommand(StartTheSimulation);
             CommandStopTheSimulation = new RelayCommand(StopTheSimulation);
-            Task.Run(() =>
+            /*Task.Run(() =>
             {
                 Random r = new Random();
                 while (true)
                 {
-                    Debug.WriteLine($"Num : {NumOfBalls},  {_modelAbstractAPI._numOfBalls}");
+                    //Debug.WriteLine($"Num : {NumOfBalls},  {_modelAbstractAPI._numOfBalls}");
                     Thread.Sleep(1000);
                 }
-            });
+            });*/
         }
 
     }

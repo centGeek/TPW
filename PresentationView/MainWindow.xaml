@@ -42,14 +42,15 @@
         <Label Content="Podaj liczbe kuli:" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0" Margin="0,0,0,0" Grid.ColumnSpan="3"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16"/>
         <TextBox Text="{Binding NumOfBalls,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="1" FontSize="22" />
 
-        <Label  VerticalContentAlignment="Center" VerticalAlignment="Bottom" Grid.Column="4" Margin="0,0,0,0" Grid.ColumnSpan="3"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16">
-            <Label.Content>
+<!--        <Label  VerticalContentAlignment="Center" VerticalAlignment="Bottom" Grid.Column="4" Margin="0,0,0,0" Grid.ColumnSpan="3"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16">
+          <Label.Content>
                 <AccessText TextWrapping="Wrap"  Text="Ilość aktualnie animowanych kul:"></AccessText>
             </Label.Content>
-        </Label>
+       </Label>
+-->
 
 
-        <Label Content="{Binding NumOfBalls}" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Background="#FFF5A3A3"/>
+        <!--<Label Content="{Binding NumOfBalls}" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Background="#FFF5A3A3"/>-->
         <Button Content="+" VerticalAlignment="Top" Margin="0,0,0,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" Width="30" Height="30" IsDefault="True" Command="{Binding CommandAddOneToNumOfBalls}" />
         <Button Content="-" VerticalAlignment="Top" Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Width="30" Height="30" IsDefault="True" Command="{Binding CommandSubtractOneToNumOfBalls}" />
         

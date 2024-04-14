@@ -33,7 +33,7 @@ namespace PresentationModel
 
         public override void StartSimulation()
         {
-            Debug.WriteLine($"Model chce pojawić kule w ilosci {_numOfBalls}");
+            //Debug.WriteLine($"Model chce pojawić kule w ilosci {_numOfBalls}");
             _logicAPI.addBalls(_numOfBalls, 20);
             foreach (LogicBallAPI logicBall in _logicAPI.getBalls())
             {
@@ -43,20 +43,7 @@ namespace PresentationModel
             }
             _logicAPI.startMoving();
 
-            Debug.WriteLine($"MODEL stowrzyłem kulke w ilosc {_ballsModel.Count}");
 
-            /* Task.Run(() =>
-             {
-                 while (true)
-                 {
-                     //NumOfBalls = r.Next().ToString();
-                     Debug.WriteLine($"Kule w model : {_ballsModel.Count}");
-                     //Debug.WriteLine($"pierwsza kula ma takie  : x{_ballsModel[0].X}");
-                     //_ballsModel[0].X -= 10;
-
-                     Thread.Sleep(1000);
-                 }
-             });*/
         }
 
         public override void StopSimulation()
@@ -64,9 +51,9 @@ namespace PresentationModel
             //TODO usunąć DEBUG
 
             _logicAPI.removeBalls();
-            Debug.WriteLine($"Usuwam {_ballsModel.Count} kulek");
+            //Debug.WriteLine($"Usuwam {_ballsModel.Count} kulek");
             _ballsModel.Clear();
-            Debug.WriteLine($"pozostało: {_ballsModel.Count}");
+            //Debug.WriteLine($"pozostało: {_ballsModel.Count}");
 
         }
 
@@ -74,3 +61,22 @@ namespace PresentationModel
 
     }
 }
+
+
+
+
+//TO SIE MOZE JESZCZE PRZYDA
+//Debug.WriteLine($"MODEL stowrzyłem kulke w ilosc {_ballsModel.Count}");
+
+/* Task.Run(() =>
+ {
+     while (true)
+     {
+         //NumOfBalls = r.Next().ToString();
+         Debug.WriteLine($"Kule w model : {_ballsModel.Count}");
+         //Debug.WriteLine($"pierwsza kula ma takie  : x{_ballsModel[0].X}");
+         //_ballsModel[0].X -= 10;
+
+         Thread.Sleep(1000);
+     }
+ });*/
