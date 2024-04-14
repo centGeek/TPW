@@ -17,9 +17,38 @@ namespace Logic
             return balls;
         }
 
+        public List<float> getAllXCoordinates()
+        {
+            List<float> xCoordinates= new List<float>();
+            foreach (BallAPI ball in balls)
+            {
+                xCoordinates.Add(ball.getPosition().X);
+            }
+            return xCoordinates; 
+        }
+        public List<float> getAllYCoordinates()
+        {
+            List<float> yCoordinates = new List<float>();
+            foreach (BallAPI ball in balls)
+            {
+                yCoordinates.Add(ball.getPosition().Y);
+            }
+            return yCoordinates;
+        }
+        public List<float> getAllRCoordinates()
+        {
+            List<float> radiusList = new List<float>();
+            foreach (BallAPI ball in balls)
+            {
+                radiusList.Add(ball.getR());
+            }
+            return radiusList;
+        }
+
+
         public override void changeXdirection(BallAPI ball)
         {
-            ball.setSpeed(-ball.getPosition().X, 0);
+            ball.setSpeed(ball.getPosition().X, 0);
         }
 
         public override void changeYdirection(BallAPI ball)
