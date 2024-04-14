@@ -74,7 +74,7 @@ namespace Logic
         {
             return _balls;
         }
-        public void checkBorderCollision(Object s, DataEventArgs e)
+        public override void checkBorderCollision(Object s, DataEventArgs e)
         {
             BallAPI ball = (BallAPI)s;
             if (ball.getPosition().X + ball.getR() >= this._width || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= this._width || ball.getPosition().X + ball.getR() >= 0 || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= 0)
