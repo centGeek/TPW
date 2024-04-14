@@ -23,7 +23,7 @@ namespace Data
         {
             return new Ball(new Vector2(X, Y), radius, new Vector2(X_speed, Y_speed));
         }
-        public abstract void MakeMove();
+        public abstract void MakeMove(int width, int height);
 
         public void RaisePropertyChanged(string v)
         {

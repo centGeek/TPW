@@ -9,6 +9,10 @@ namespace Logic
         private List<LogicBallAPI> _balls { get; set; }
         internal BoardAPI dataAPI;
 
+        private int _maxX = 370;
+        private int _maxY = 370;
+
+
         public LogicBoard(BoardAPI boardAPI)
         {
             this._height = boardAPI.Height;
@@ -36,13 +40,13 @@ namespace Logic
                 int SpeedX;
                 do
                 {
-                    SpeedX = random.Next(-30, 33);
+                    SpeedX = random.Next(-3, 3);
                 } while (SpeedX == 0);
 
                 int SpeedY;
                 do
                 {
-                    SpeedY = random.Next(-33, 33);
+                    SpeedY = random.Next(-3, 3);
                 } while (SpeedY == 0);
 
                 BallAPI dataBall = dataAPI.AddBall(x, y, SpeedX, SpeedY, ballRadius);
@@ -81,12 +85,13 @@ namespace Logic
         public override void checkBorderCollision(Object s, DataEventArgs e)
         {
             BallAPI ball = (BallAPI)s;
-            if (ball.getPosition().X + ball.getR() >= this._width || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= this._width || ball.getPosition().X + ball.getR() >= 0 || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= 0)
+            bool isCorrectInX = (ball.getPosition().X + ball.getR() + ball.getSpeed().X < _maxX - 2 * ball.getR()) && (ball.getPosition().X + ball.getSpeed().X - ball.getR() > 0);
+            bool isCorrectInY = (ball.getPosition().Y + ball.getR() + ball.getSpeed().Y < _maxY - 2 * ball.getR()) && (ball.getPosition().Y + ball.getSpeed().Y - ball.getR() > 0);
+            if (!isCorrectInX)
             {
                 ball.setSpeed(-ball.getSpeed().X, ball.getSpeed().Y);
-
             }
-            if (ball.getPosition().Y + ball.getR() >= this._height || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= this.GetHeight() || ball.getPosition().Y + ball.getR() >= 0 || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= 0)
+            if (!isCorrectInY)
             {
                 ball.setSpeed(ball.getSpeed().X, -ball.getSpeed().Y);
             }
@@ -101,13 +106,12 @@ namespace Logic
 
                     foreach (BallAPI kula in ballAPIs)
                     {
-                        kula.setPosition(0, 0);
-                        kula.MakeMove();
-                        Debug.WriteLine($"Poruszyłem kulą {kula.getPosition().ToString()}");
-                        Thread.Sleep(100);
+                       
+                        kula.MakeMove(_width,_height);
+//                        Debug.WriteLine($"Poruszyłem kulą {kula.getPosition().ToString()}")
 
                     }
-                    Debug.WriteLine(_balls[0].X);
+// Debug.WriteLine(_balls[0].X);
                 }
             }
             //_balls.Clear();
