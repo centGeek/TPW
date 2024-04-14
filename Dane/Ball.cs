@@ -38,7 +38,6 @@ namespace Data
         {
             _speed = speed; 
             _position = position;
-            _speed = new Vector2(0, 0);
             _r = r;
         }
         public Ball(Vector2 position, int r)

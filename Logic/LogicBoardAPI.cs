@@ -1,6 +1,7 @@
 ﻿using Data;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +16,7 @@ namespace Logic
         {
             return new LogicBoard(dataApi == null ? BoardAPI.CreateApi(600, 400) : dataApi);
         }
+        public abstract void checkBorderCollision(Object s, DataEventArgs e); 
 
     }
 }
