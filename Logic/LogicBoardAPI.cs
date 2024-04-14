@@ -14,10 +14,14 @@ namespace Logic
         public abstract List<LogicBallAPI> getBalls();
         public static LogicBoardAPI CreateAPI(BoardAPI dataApi = null)
         {
-            return new LogicBoard(dataApi == null ? BoardAPI.CreateApi(380, 380) : dataApi);
+            return new LogicBoard(dataApi == null ? BoardAPI.CreateApi(370, 370) : dataApi);
         }
-        public abstract void checkBorderCollision(Object s, DataEventArgs e); 
+        public abstract void checkBorderCollision(Object s, DataEventArgs e);
 
         public abstract void removeBalls();
+
+        public abstract void startMoving();
+
+        protected bool isMoving;
     }
 }

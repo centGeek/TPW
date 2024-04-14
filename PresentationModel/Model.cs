@@ -33,15 +33,16 @@ namespace PresentationModel
 
         public override void StartSimulation()
         {
-            //TODO tu sie jazda troche dzieje
             Debug.WriteLine($"Model chce pojawić kule w ilosci {_numOfBalls}");
-            _logicAPI.addBalls(_numOfBalls, 10);
+            _logicAPI.addBalls(_numOfBalls, 20);
             foreach (LogicBallAPI logicBall in _logicAPI.getBalls())
             {
                 BallModelAPI temp = BallModelAPI.CreateBallModel(logicBall);
                 logicBall.changedPosition += temp.UpdateBallModel;
                 _ballsModel.Add(temp);
             }
+            _logicAPI.startMoving();
+
             Debug.WriteLine($"MODEL stowrzyłem kulke w ilosc {_ballsModel.Count}");
 
             /* Task.Run(() =>
@@ -61,11 +62,12 @@ namespace PresentationModel
         public override void StopSimulation()
         {
             //TODO usunąć DEBUG
-            Task.Run(_logicAPI.removeBalls);
 
+            _logicAPI.removeBalls();
             Debug.WriteLine($"Usuwam {_ballsModel.Count} kulek");
-            //_ballsModel.Clear();
+            _ballsModel.Clear();
             Debug.WriteLine($"pozostało: {_ballsModel.Count}");
+
         }
 
 

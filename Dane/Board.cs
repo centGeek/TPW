@@ -15,11 +15,11 @@ namespace Data
         public Board(int width, int height)
         {
             Width = width;
-            Height = height;;
+            Height = height;
         }
 
         public override BallAPI AddBall(float X, float Y, int X_speed, int Y_speed, int radius)
-        {   
+        {
             BallAPI ball = BallAPI.CreateBall(X, Y, X_speed, Y_speed, radius);
             Balls.Add(ball);
             return ball;

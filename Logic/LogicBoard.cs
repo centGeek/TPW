@@ -30,19 +30,19 @@ namespace Logic
             for (int i = 0; i < ballsQuantity; i++)
             {
                 Random random = new Random();
-                float x = random.Next(ballRadius, _height - ballRadius);
-                float y = random.Next(ballRadius, _width - ballRadius);
+                float x = random.Next(0, _height - ballRadius);
+                float y = random.Next(0, _width - ballRadius);
 
                 int SpeedX;
                 do
                 {
-                    SpeedX = random.Next(-30, 33);
+                    SpeedX = random.Next(-3, 3);
                 } while (SpeedX == 0);
 
                 int SpeedY;
                 do
                 {
-                    SpeedY = random.Next(-33, 33);
+                    SpeedY = random.Next(-3, 3);
                 } while (SpeedY == 0);
 
                 BallAPI dataBall = dataAPI.AddBall(x, y, SpeedX, SpeedY, ballRadius);
@@ -94,23 +94,23 @@ namespace Logic
 
         public override void removeBalls()
         {
-
+            isMoving = false;
+            _balls.Clear();
+        }
+        public override void startMoving()
+        {
+            isMoving = true;
+            Task.Run(() =>
             {
-                for (int i = 0; i < 10; i++)
+                while (isMoving)
                 {
-
                     foreach (BallAPI kula in ballAPIs)
                     {
-                        kula.setPosition(0, 0);
                         kula.MakeMove();
-                        Debug.WriteLine($"Poruszyłem kulą {kula.getPosition().ToString()}");
-                        Thread.Sleep(100);
-
+                        Thread.Sleep(10);
                     }
-                    Debug.WriteLine(_balls[0].X);
                 }
-            }
-            //_balls.Clear();
+            });
         }
     }
 

@@ -26,7 +26,7 @@ namespace PresentationModel
         public override float X
         {
             get { return logicBall.X; }
-            set { Debug.WriteLine($"Było {x}, bedzie {value}"); logicBall.X = value; OnPropertyChanged(); }
+            set { logicBall.X = value; OnPropertyChanged(); }
         }
         public override float Y
         {
