@@ -11,10 +11,12 @@ namespace Logic
         public abstract event EventHandler<LogicEventArgs>? changedPosition;
         public abstract float X { get; set; }
         public abstract float Y { get; set; }
+        public abstract float R { get; set; }
 
-        public static LogicBallAPI CreateBall(int xPosition, int yPosition)
+
+        public static LogicBallAPI CreateBall(int xPosition, int yPosition, int r)
         {
-            return new LogicBall(xPosition, yPosition);
+            return new LogicBall(xPosition, yPosition, r);
         }
     }
 }

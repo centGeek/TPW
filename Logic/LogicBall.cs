@@ -12,6 +12,7 @@ namespace Logic
     {
         private float _x;
         private float _y;
+        private float _r;
 
         public override event EventHandler<LogicEventArgs>? changedPosition;
 
@@ -20,13 +21,15 @@ namespace Logic
             BallAPI ball = (BallAPI)s;
             _x= ball.getPosition().X;
             _y = ball.getPosition().Y;
+            _r = ball.getR(); 
             LogicEventArgs args = new LogicEventArgs(this);
             changedPosition?.Invoke(this, args);
         }
-        public LogicBall(float x, float y)
+        public LogicBall(float x, float y, float r)
         {
             this._x = x;
             this._y = y;
+            this._r = r; 
         }
         public override float X
         {
@@ -37,6 +40,11 @@ namespace Logic
         {
             get => _y;
             set { _y = value; }
+        }
+        public override float R
+        {
+            get => _r;
+            set { _r = value; }
         }
 
     }

@@ -1,22 +1,14 @@
 ﻿using Data;
 using System.ComponentModel;
+using System.Numerics;
 using System.Threading;
 namespace Logic
 {
     internal sealed class Logic : LogicAPI
     {
         static public readonly int frequency = 100; 
-        internal List<Ball> balls = new List<Ball>();
-        public override List<BallAPI> createBalls(int maxX, int maxY, int amount)
-        {
-            List<BallAPI> balls = new List<BallAPI>(amount);
-            for (int i = 0; i < balls.Count; i++)
-            {
-                balls[i] = balls[i].createBall(maxX, maxY, 5);
-            }
-            return balls;
-        }
-
+        private List<Ball> balls = new List<Ball>();
+   
         public List<float> getAllXCoordinates()
         {
             List<float> xCoordinates= new List<float>();
@@ -58,8 +50,8 @@ namespace Logic
 
         public override void updatePosition(BallAPI ball)
         {
-            ball.setPosition(ball.getPosition().X + ball.getSpeed().X * (1.0f / frequency), 0);
-            ball.setPosition(0,  ball.getPosition().Y+ ball.getSpeed().Y * (1.0f / frequency));   
+            ball.setPosition(ball.getPosition().X + ball.getSpeed().X * (1.0f / frequency),
+                ball.getPosition().Y + ball.getSpeed().Y * (1.0f / frequency));
         }
 
         public override void updateBoard(BoardAPI board)
