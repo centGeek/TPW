@@ -109,9 +109,9 @@ namespace Logic
             {
                 while (isMoving)
                 {
-                    foreach (BallAPI kula in ballAPIs)
+                    foreach (BallAPI ballAPI in ballAPIs)
                     {
-                        kula.MakeMove(_maxX, _maxY);
+                        ballAPI.MakeMove(_maxX, _maxY);
                         Thread.Sleep(3);
                     }
                 }

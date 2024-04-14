@@ -58,7 +58,6 @@ namespace Data
             if (!isCorrectInX)
             {
                 this.setSpeed(-this.getSpeed().X, this.getSpeed().Y);
-                //Debug.WriteLine(this.getPosition());
 
             }
             if (!isCorrectInY)
