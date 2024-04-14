@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Logic;
+using Microsoft.VisualBasic;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -7,10 +9,18 @@ using System.Threading.Tasks;
 
 namespace PresentationModel
 {
-    public class ModelAbstractAPI : INotifyPropertyChanged
+    public abstract class ModelAbstractAPI
     {
-        public ModelAbstractAPI() { }
+        public int _numOfBalls;
+        public int _height;
+        public int _width;
+        protected LogicAPI _logicAPI;
+        public abstract void StartSimulation();
+        public abstract void StopSimulation();
 
-        public event PropertyChangedEventHandler? PropertyChanged;
+        public static Model CreateNewModel(int w, int h)
+        {
+            return new Model(w, h);
+        }
     }
 }
