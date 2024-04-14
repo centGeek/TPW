@@ -2,19 +2,21 @@
 using Microsoft.VisualBasic;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace PresentationModel
 {
-    public abstract class ModelAbstractAPI
+    public abstract class ModelAbstractAPI : INotifyPropertyChanged
     {
         public int _numOfBalls;
         public int _height;
         public int _width;
-        protected LogicAPI _logicAPI;
+        protected LogicBoardAPI _logicAPI;
         public abstract void StartSimulation();
         public abstract void StopSimulation();
 
@@ -22,5 +24,13 @@ namespace PresentationModel
         {
             return new Model(w, h);
         }
+        protected ObservableCollection<BallModelAPI> _ballsModel = new ObservableCollection<BallModelAPI>();
+
+        public event PropertyChangedEventHandler? PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+        public abstract ObservableCollection<BallModelAPI> GetBallsModel();
     }
 }
