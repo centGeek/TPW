@@ -18,11 +18,13 @@ namespace Data
 
 
         public abstract event EventHandler<DataEventArgs> ChangedPosition;
-        
+
         public static BallAPI CreateBall(float X, float Y, float X_speed, float Y_speed, int radius)
         {
-            return new Ball(new Vector2(X,Y), radius,  new Vector2(X_speed, Y_speed));
+            return new Ball(new Vector2(X, Y), radius, new Vector2(X_speed, Y_speed));
         }
+        public abstract void MakeMove();
+
         public void RaisePropertyChanged(string v)
         {
             throw new NotImplementedException();

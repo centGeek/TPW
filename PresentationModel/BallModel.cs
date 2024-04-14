@@ -1,4 +1,5 @@
 ﻿using Logic;
+using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
 
 namespace PresentationModel
@@ -21,12 +22,12 @@ namespace PresentationModel
         public override float X
         {
             get { return x; }
-            set { x = value; OnPropertyChanged(); }
+            set { Debug.WriteLine($"Było {x}, bedzie {value}"); x = value; OnPropertyChanged("BallsFromModel"); }
         }
         public override float Y
         {
             get { return y; }
-            set { y = value; OnPropertyChanged(); }
+            set { y = value; OnPropertyChanged(nameof(Y)); }
         }
         public override float R
         {
@@ -37,9 +38,9 @@ namespace PresentationModel
         public override void UpdateBallModel(object s, LogicEventArgs e)
         {
             LogicBallAPI logicBallAPI = (LogicBallAPI)s;
-            x = (float)logicBallAPI.X;
-            y = (float)logicBallAPI.Y;
-            r = (float)logicBallAPI.R;
+            X = (float)logicBallAPI.X;
+            Y = (float)logicBallAPI.Y;
+            //r = (float)logicBallAPI.R;
         }
     }
 }

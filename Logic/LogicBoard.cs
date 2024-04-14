@@ -1,4 +1,5 @@
 ﻿using Data;
+using System.Diagnostics;
 namespace Logic
 {
     public class LogicBoard : LogicBoardAPI
@@ -13,12 +14,16 @@ namespace Logic
             this._height = boardAPI.Height;
             this._width = boardAPI.Width;
             _balls = new List<LogicBallAPI>();
+            ballAPIs = new List<BallAPI>();
             dataAPI = boardAPI;
+
         }
         public override List<LogicBallAPI> getBalls()
         {
             return _balls;
         }
+
+        private List<BallAPI> ballAPIs;
 
         public override void addBalls(int ballsQuantity, int ballRadius)
         {
@@ -31,13 +36,13 @@ namespace Logic
                 int SpeedX;
                 do
                 {
-                    SpeedX = random.Next(-3, 3);
+                    SpeedX = random.Next(-30, 33);
                 } while (SpeedX == 0);
 
                 int SpeedY;
                 do
                 {
-                    SpeedY = random.Next(-3, 3);
+                    SpeedY = random.Next(-33, 33);
                 } while (SpeedY == 0);
 
                 BallAPI dataBall = dataAPI.AddBall(x, y, SpeedX, SpeedY, ballRadius);
@@ -46,6 +51,8 @@ namespace Logic
 
                 dataBall.ChangedPosition += ball.UpdateBall;
                 dataBall.ChangedPosition += checkBorderCollision;
+
+                ballAPIs.Add(dataBall);
 
                 _balls.Add(ball);
             }
@@ -70,10 +77,7 @@ namespace Logic
         {
             _width = width;
         }
-        public List<LogicBallAPI> GetBalls()
-        {
-            return _balls;
-        }
+
         public override void checkBorderCollision(Object s, DataEventArgs e)
         {
             BallAPI ball = (BallAPI)s;
@@ -85,12 +89,25 @@ namespace Logic
             if (ball.getPosition().Y + ball.getR() >= this._height || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= this.GetHeight() || ball.getPosition().Y + ball.getR() >= 0 || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= 0)
             {
                 ball.setSpeed(ball.getSpeed().X, -ball.getSpeed().Y);
-
             }
         }
 
         public override void removeBalls()
         {
+            for (int i = 0; i < 100; i++)
+            {
+
+                foreach (BallAPI kula in ballAPIs)
+                {
+                    kula.setPosition(0, 0);
+                    kula.MakeMove();
+                    Debug.WriteLine($"Poruszyłem kulą {kula.getPosition().ToString()}");
+                    Thread.Sleep(100);
+
+                }
+                Debug.WriteLine(_balls[0].X);
+            }
+
             _balls.Clear();
         }
     }

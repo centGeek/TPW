@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Data;
 
 
 namespace Logic
 {
-    public  class LogicBall : LogicBallAPI
+    public class LogicBall : LogicBallAPI
     {
         private float _x;
         private float _y;
@@ -19,9 +19,9 @@ namespace Logic
         public void UpdateBall(Object s, DataEventArgs e)
         {
             BallAPI ball = (BallAPI)s;
-            _x= ball.getPosition().X;
+            _x = ball.getPosition().X;
             _y = ball.getPosition().Y;
-            _r = ball.getR(); 
+            _r = ball.getR();
             LogicEventArgs args = new LogicEventArgs(this);
             changedPosition?.Invoke(this, args);
         }
@@ -29,12 +29,12 @@ namespace Logic
         {
             this._x = x;
             this._y = y;
-            this._r = r; 
+            this._r = r;
         }
         public override float X
         {
             get => _x;
-            set { _x= value; }
+            set { _x = value; }
         }
         public override float Y
         {

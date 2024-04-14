@@ -56,7 +56,7 @@
         <Button Content="Start" VerticalAlignment="Top" Margin="20,25,20,0" Click="Button_Click"  Grid.Column="0" Height="30" Grid.ColumnSpan="3" Command="{Binding CommandStartTheSimulation}"/>
         <Button Content="Stop" VerticalAlignment="Top" Margin="22,25,30,0" Click="Button_Click" Grid.Column="4" Height="30" Grid.ColumnSpan="3" Command="{Binding CommandStopTheSimulation}"/>
 
-        <ItemsControl ItemsSource="{Binding BallsFromModel}" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2">
+        <ItemsControl ItemsSource="{Binding BallsFromModel,UpdateSourceTrigger=PropertyChanged}" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
                     <Canvas Width="370" Height="370" Background="Brown"/>
@@ -64,8 +64,8 @@
             </ItemsControl.ItemsPanel>
             <ItemsControl.ItemContainerStyle>
                 <Style TargetType="ContentPresenter">
-                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
-                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                    <Setter Property="Canvas.Left" Value="{Binding X,UpdateSourceTrigger=PropertyChanged}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y,UpdateSourceTrigger=PropertyChanged}"/>
                 </Style>
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
