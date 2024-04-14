@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public abstract class BallAPI : INotifyPropertyChanged
+    public abstract class BallAPI
     {
         public abstract Vector2 getPosition();
         public abstract void setPosition(float x, float y);
@@ -17,10 +17,12 @@ namespace Data
         public abstract int getR();
 
 
-        public event PropertyChangedEventHandler? PropertyChanged;
-
-        public abstract BallAPI createBall(float X, float Y, int radius);
-
+        public abstract event EventHandler<DataEventArgs> ChangedPosition;
+        
+        public static BallAPI CreateBall(float X, float Y, float X_speed, float Y_speed, int radius)
+        {
+            return new Ball(new Vector2(X,Y), radius,  new Vector2(X_speed, Y_speed));
+        }
         public void RaisePropertyChanged(string v)
         {
             throw new NotImplementedException();

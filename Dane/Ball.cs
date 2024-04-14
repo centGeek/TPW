@@ -8,7 +8,7 @@ namespace Data
     {
         private Vector2 _position {  get; set; }
         private Vector2 _speed { get; set; }
-        private int _r { get;  }
+        private int _r { get; set;  }
 
         public override Vector2 getPosition()
         {
@@ -32,10 +32,18 @@ namespace Data
         {
                 return _r;
         }
-        public event PropertyChangedEventHandler PropertyChanged;
+        public override event EventHandler<DataEventArgs> ChangedPosition;
 
+        public Ball(Vector2 position, int r, Vector2 speed)
+        {
+            _speed = speed; 
+            _position = position;
+            _speed = new Vector2(0, 0);
+            _r = r;
+        }
         public Ball(Vector2 position, int r)
         {
+            _speed = Vector2.Zero;
             _position = position;
             _speed = new Vector2(0, 0);
             _r = r;
@@ -44,17 +52,10 @@ namespace Data
         public void MakeMove()
         {
             _position += _speed;
-            OnPropertyChanged(nameof(_position));
-        }
-        public override BallAPI createBall(float X, float Y, int radius)
-        {
-            return new Ball(new Vector2(X, Y), radius); 
+            DataEventArgs args = new DataEventArgs(this);
+            ChangedPosition?.Invoke(this, args);
+
         }
 
-
-        protected void OnPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
     }
 }
