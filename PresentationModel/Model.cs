@@ -50,7 +50,11 @@ namespace PresentationModel
 
         public override void StopSimulation()
         {
-            throw new NotImplementedException();
+            //TODO usunąć DEBUG
+            _logicAPI.removeBalls();
+            Debug.WriteLine($"Usuwam {_ballsModel.Count} kulek");
+            _ballsModel.Clear();
+            Debug.WriteLine($"pozostało: {_ballsModel.Count}");
         }
 
 

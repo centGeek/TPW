@@ -76,10 +76,13 @@ namespace PresentationViewModel
         private void StartTheSimulation()
         {
             _modelAbstractAPI.StartSimulation();
+            OnPropertyChanged(nameof(BallsFromModel));
         }
         private void StopTheSimulation()
         {
             _modelAbstractAPI.StopSimulation();
+            OnPropertyChanged(nameof(BallsFromModel));
+
         }
 
         public ICommand CommandAddOneToNumOfBalls { get; private set; }
@@ -91,7 +94,7 @@ namespace PresentationViewModel
 
         public MyViewModel()
         {
-            _ballsFromModel = _modelAbstractAPI.GetBallsModel();
+            _modelAbstractAPI = ModelAbstractAPI.CreateNewModel(380, 380);
             _modelAbstractAPI._numOfBalls = 15;
             CommandAddOneToNumOfBalls = new RelayCommand(AddOneToNumOfBalls);
             CommandSubtractOneToNumOfBalls = new RelayCommand(SubtractOneToNumOfBalls);
@@ -102,7 +105,6 @@ namespace PresentationViewModel
                 Random r = new Random();
                 while (true)
                 {
-                    //NumOfBalls = r.Next().ToString();
                     Debug.WriteLine($"Num : {NumOfBalls},  {_modelAbstractAPI._numOfBalls}");
                     Thread.Sleep(1000);
                 }

@@ -17,7 +17,7 @@ namespace Logic
         }
         public override List<LogicBallAPI> getBalls()
         {
-            return _balls; 
+            return _balls;
         }
 
         public override void addBalls(int ballsQuantity, int ballRadius)
@@ -26,7 +26,7 @@ namespace Logic
             {
                 Random random = new Random();
                 float x = random.Next(ballRadius, _height - ballRadius);
-                float y = random.Next(ballRadius, _width- ballRadius);
+                float y = random.Next(ballRadius, _width - ballRadius);
 
                 int SpeedX;
                 do
@@ -77,17 +77,22 @@ namespace Logic
         public void checkBorderCollision(Object s, DataEventArgs e)
         {
             BallAPI ball = (BallAPI)s;
-                if (ball.getPosition().X + ball.getR() >= this._width || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= this._width || ball.getPosition().X + ball.getR() >= 0 || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= 0)
-                {
-                    ball.setSpeed(-ball.getSpeed().X, ball.getSpeed().Y);
+            if (ball.getPosition().X + ball.getR() >= this._width || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= this._width || ball.getPosition().X + ball.getR() >= 0 || ball.getPosition().X + ball.getSpeed().X + ball.getR() >= 0)
+            {
+                ball.setSpeed(-ball.getSpeed().X, ball.getSpeed().Y);
 
-                }
-                if (ball.getPosition().Y + ball.getR() >= this._height || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= this.GetHeight() || ball.getPosition().Y + ball.getR() >= 0 || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= 0)
-                {
-                    ball.setSpeed(ball.getSpeed().X, -ball.getSpeed().Y);
-
-                }
             }
+            if (ball.getPosition().Y + ball.getR() >= this._height || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= this.GetHeight() || ball.getPosition().Y + ball.getR() >= 0 || ball.getPosition().Y + ball.getSpeed().Y + ball.getR() >= 0)
+            {
+                ball.setSpeed(ball.getSpeed().X, -ball.getSpeed().Y);
 
+            }
+        }
+
+        public override void removeBalls()
+        {
+            _balls.Clear();
         }
     }
+
+}

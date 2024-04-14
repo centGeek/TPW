@@ -9,8 +9,7 @@ namespace PresentationViewModel
 {
     public abstract class IViewModel : INotifyPropertyChanged
     {
-        protected ObservableCollection<BallModelAPI> _ballsFromModel;
-        protected ModelAbstractAPI _modelAbstractAPI = ModelAbstractAPI.CreateNewModel(380, 380);
+        protected ModelAbstractAPI _modelAbstractAPI;
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
