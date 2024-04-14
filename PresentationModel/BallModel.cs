@@ -10,29 +10,33 @@ namespace PresentationModel
         private float y;
         private float r;
 
-
+        LogicBallAPI logicBall;
         public BallModel(float x, float y, float r)
         {
             this.x = x;
             this.y = y;
             this.r = r;
         }
+        public BallModel(LogicBallAPI logicBallAPI)
+        {
+            logicBall = logicBallAPI;
+        }
 
 
         public override float X
         {
-            get { return x; }
-            set { Debug.WriteLine($"Było {x}, bedzie {value}"); x = value; OnPropertyChanged("BallsFromModel"); }
+            get { return logicBall.X; }
+            set { Debug.WriteLine($"Było {x}, bedzie {value}"); logicBall.X = value; OnPropertyChanged(); }
         }
         public override float Y
         {
-            get { return y; }
-            set { y = value; OnPropertyChanged(nameof(Y)); }
+            get { return logicBall.Y; }
+            set { logicBall.Y = value; OnPropertyChanged(); }
         }
         public override float R
         {
-            get { return r; }
-            set { r = value; OnPropertyChanged(); }
+            get { return logicBall.R; }
+            set { logicBall.R = value; OnPropertyChanged(); }
         }
 
         public override void UpdateBallModel(object s, LogicEventArgs e)
@@ -40,7 +44,7 @@ namespace PresentationModel
             LogicBallAPI logicBallAPI = (LogicBallAPI)s;
             X = (float)logicBallAPI.X;
             Y = (float)logicBallAPI.Y;
-            //r = (float)logicBallAPI.R;
+            R = (float)logicBallAPI.R;
         }
     }
 }

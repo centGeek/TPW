@@ -94,21 +94,23 @@ namespace Logic
 
         public override void removeBalls()
         {
-            for (int i = 0; i < 100; i++)
+
             {
-
-                foreach (BallAPI kula in ballAPIs)
+                for (int i = 0; i < 10; i++)
                 {
-                    kula.setPosition(0, 0);
-                    kula.MakeMove();
-                    Debug.WriteLine($"Poruszyłem kulą {kula.getPosition().ToString()}");
-                    Thread.Sleep(100);
 
+                    foreach (BallAPI kula in ballAPIs)
+                    {
+                        kula.setPosition(0, 0);
+                        kula.MakeMove();
+                        Debug.WriteLine($"Poruszyłem kulą {kula.getPosition().ToString()}");
+                        Thread.Sleep(100);
+
+                    }
+                    Debug.WriteLine(_balls[0].X);
                 }
-                Debug.WriteLine(_balls[0].X);
             }
-
-            _balls.Clear();
+            //_balls.Clear();
         }
     }
 

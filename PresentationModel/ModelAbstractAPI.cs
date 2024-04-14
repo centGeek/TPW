@@ -24,13 +24,13 @@ namespace PresentationModel
         {
             return new Model(w, h);
         }
-        protected ObservableCollection<BallModelAPI> _ballsModel = new ObservableCollection<BallModelAPI>();
+        protected List<BallModelAPI> _ballsModel;
 
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public abstract ObservableCollection<BallModelAPI> GetBallsModel();
+        public abstract List<BallModelAPI> GetBallsModel();
     }
 }
