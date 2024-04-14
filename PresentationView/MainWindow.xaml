@@ -40,14 +40,40 @@
         </Rectangle>
 
         <Label Content="Podaj liczbe kuli:" VerticalContentAlignment="Center" VerticalAlignment="Bottom" Grid.Column="0" Margin="0,0,0,0" Grid.ColumnSpan="3"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16"/>
-        <TextBox Text="{Binding NumOfBalls,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Column="1" FontSize="22" />
+        <TextBox Text="{Binding NumOfBalls,UpdateSourceTrigger=PropertyChanged}" Margin="0,0,0,0" Grid.Row="1" VerticalAlignment="Top" HorizontalAlignment="Center" Grid.Column="1" FontSize="22" />
+
+        <Label  VerticalContentAlignment="Center" VerticalAlignment="Bottom" Grid.Column="4" Margin="0,0,0,0" Grid.ColumnSpan="3"  HorizontalContentAlignment="Center" HorizontalAlignment="Center" FontSize="16">
+            <Label.Content>
+                <AccessText TextWrapping="Wrap"  Text="Ilość aktualnie animowanych kul:"></AccessText>
+            </Label.Content>
+        </Label>
+
 
         <Label Content="{Binding NumOfBalls}" Grid.Column="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" HorizontalAlignment="Center" VerticalAlignment="Center" Grid.Row="1" Background="#FFF5A3A3"/>
-        <Button Content="+" Margin="0,0,0,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" Width="25" Height="25" IsDefault="True" Command="{Binding CommandAddOneToNumOfBalls}" />
-        <Button Content="-" Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Width="25" Height="25" IsDefault="True" Command="{Binding CommandSubtractOneToNumOfBalls}" />
+        <Button Content="+" VerticalAlignment="Top" Margin="0,0,0,0" Grid.Column="2" Grid.Row="1" HorizontalAlignment="Center" Width="30" Height="30" IsDefault="True" Command="{Binding CommandAddOneToNumOfBalls}" />
+        <Button Content="-" VerticalAlignment="Top" Margin="0,0,0,0" Grid.Column="0" Grid.Row="1" HorizontalAlignment="Center" Width="30" Height="30" IsDefault="True" Command="{Binding CommandSubtractOneToNumOfBalls}" />
         
         <Button Content="Start" VerticalAlignment="Top" Margin="20,25,20,0" Click="Button_Click"  Grid.Column="0" Height="30" Grid.ColumnSpan="3" Command="{Binding CommandStartTheSimulation}"/>
         <Button Content="Stop" VerticalAlignment="Top" Margin="22,25,30,0" Click="Button_Click" Grid.Column="4" Height="30" Grid.ColumnSpan="3" Command="{Binding CommandStopTheSimulation}"/>
-    
+
+        <ItemsControl ItemsSource="{Binding BallsFromModel}" Grid.Column="3" Grid.Row="0" Grid.RowSpan="2">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <Canvas Width="370" Height="370" Background="Brown"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemContainerStyle>
+                <Style TargetType="ContentPresenter">
+                    <Setter Property="Canvas.Left" Value="{Binding X}"/>
+                    <Setter Property="Canvas.Top" Value="{Binding Y}"/>
+                </Style>
+            </ItemsControl.ItemContainerStyle>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Ellipse Height="{Binding R}" Width="{Binding R}" Stroke="BlanchedAlmond" Fill="Green"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+
     </Grid>
 </Window>

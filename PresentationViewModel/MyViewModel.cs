@@ -1,4 +1,7 @@
-﻿using PresentationViewModel;
+﻿using PresentationModel;
+using PresentationViewModel;
+using System.Collections;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Security.Cryptography.X509Certificates;
@@ -10,16 +13,17 @@ namespace PresentationViewModel
     public class MyViewModel : IViewModel
     {
 
-
+        // TODO mam takie marzenie aby czytać z ekrany wysokość tego co się dopasuje do warunków a następnie 
+        // to będzie przekazywane niżej
         public int HeightOfViewRectangle
         {
             get
             {
-                return modelAbstractAPI._height;
+                return _modelAbstractAPI._height;
             }
             set
             {
-                modelAbstractAPI._height = value;
+                _modelAbstractAPI._height = value;
                 OnPropertyChanged();
             }
         }
@@ -27,11 +31,11 @@ namespace PresentationViewModel
         {
             get
             {
-                return modelAbstractAPI._width;
+                return _modelAbstractAPI._width;
             }
             set
             {
-                modelAbstractAPI._width = value;
+                _modelAbstractAPI._width = value;
                 OnPropertyChanged();
             }
         }
@@ -40,39 +44,42 @@ namespace PresentationViewModel
         {
             get
             {
-                return modelAbstractAPI._numOfBalls;
+                return _modelAbstractAPI._numOfBalls;
             }
             set
             {
                 if (value >= 0)
                 {
-                    modelAbstractAPI._numOfBalls = value;
+                    _modelAbstractAPI._numOfBalls = value;
                     OnPropertyChanged();
                 }
                 else
                 {
-                    modelAbstractAPI._numOfBalls = 0;
+                    _modelAbstractAPI._numOfBalls = 0;
                     OnPropertyChanged();
                 }
             }
         }
 
-        private void addOneToNumOfBalls()
+        public ObservableCollection<BallModelAPI> BallsFromModel => _modelAbstractAPI.GetBallsModel();
+
+
+        private void AddOneToNumOfBalls()
         {
             NumOfBalls++;
         }
-        private void subtractOneToNumOfBalls()
+        private void SubtractOneToNumOfBalls()
         {
             NumOfBalls--;
         }
 
         private void StartTheSimulation()
         {
-            modelAbstractAPI.StartSimulation();
+            _modelAbstractAPI.StartSimulation();
         }
         private void StopTheSimulation()
         {
-            modelAbstractAPI.StopSimulation();
+            _modelAbstractAPI.StopSimulation();
         }
 
         public ICommand CommandAddOneToNumOfBalls { get; private set; }
@@ -84,11 +91,22 @@ namespace PresentationViewModel
 
         public MyViewModel()
         {
-            modelAbstractAPI._numOfBalls = 15;
-            CommandAddOneToNumOfBalls = new RelayCommand(addOneToNumOfBalls);
-            CommandSubtractOneToNumOfBalls = new RelayCommand(subtractOneToNumOfBalls);
+            _ballsFromModel = _modelAbstractAPI.GetBallsModel();
+            _modelAbstractAPI._numOfBalls = 15;
+            CommandAddOneToNumOfBalls = new RelayCommand(AddOneToNumOfBalls);
+            CommandSubtractOneToNumOfBalls = new RelayCommand(SubtractOneToNumOfBalls);
             CommandStartTheSimulation = new RelayCommand(StartTheSimulation);
             CommandStopTheSimulation = new RelayCommand(StopTheSimulation);
+            Task.Run(() =>
+            {
+                Random r = new Random();
+                while (true)
+                {
+                    //NumOfBalls = r.Next().ToString();
+                    Debug.WriteLine($"Num : {NumOfBalls},  {_modelAbstractAPI._numOfBalls}");
+                    Thread.Sleep(1000);
+                }
+            });
         }
 
     }

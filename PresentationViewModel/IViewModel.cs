@@ -1,13 +1,16 @@
 ﻿using PresentationModel;
 using System;
+using System.Collections;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 
 namespace PresentationViewModel
 {
-    public class IViewModel : INotifyPropertyChanged
+    public abstract class IViewModel : INotifyPropertyChanged
     {
-        protected ModelAbstractAPI modelAbstractAPI = ModelAbstractAPI.CreateNewModel(380, 380);
+        protected ObservableCollection<BallModelAPI> _ballsFromModel;
+        protected ModelAbstractAPI _modelAbstractAPI = ModelAbstractAPI.CreateNewModel(380, 380);
         public event PropertyChangedEventHandler? PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
