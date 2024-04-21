@@ -8,21 +8,21 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public class LogicBall : LogicBallAPI
+    internal class LogicBall : LogicBallAPI
     {
         private float _x;
         private float _y;
         private float _r;
 
-        public override event EventHandler<LogicEventArgs>? changedPosition;
+        public override event EventHandler<LogicEventArgsAPI>? changedPosition;
 
-        public void UpdateBall(Object s, DataEventArgs e)
+        public void UpdateBall(Object s, DataEventArgsAPI e)
         {
             BallAPI ball = (BallAPI)s;
             _x = ball.getPosition().X;
             _y = ball.getPosition().Y;
             _r = ball.getR();
-            LogicEventArgs args = new LogicEventArgs(this);
+            LogicEventArgsAPI args = LogicEventArgs.CreateLogicEventArgs(this);
             changedPosition?.Invoke(this, args);
         }
         public LogicBall(float x, float y, float r)

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PresentationModel
 {
-    public class Model : ModelAbstractAPI
+    internal class Model : ModelAbstractAPI
     {
         public Model(int w, int h)
         {

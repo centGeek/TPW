@@ -3,7 +3,7 @@ using System.Windows.Input;
 
 namespace PresentationViewModel
 {
-    public class RelayCommand : ICommand
+    internal class RelayCommand : ICommand
     {
 
         private readonly Action m_Execute;

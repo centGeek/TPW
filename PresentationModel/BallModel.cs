@@ -39,7 +39,7 @@ namespace PresentationModel
             set { logicBall.R = value; OnPropertyChanged(); }
         }
 
-        public override void UpdateBallModel(object s, LogicEventArgs e)
+        public override void UpdateBallModel(object s, LogicEventArgsAPI e)
         {
             LogicBallAPI logicBallAPI = (LogicBallAPI)s;
             X = (float)logicBallAPI.X;

@@ -8,7 +8,7 @@ namespace Logic
 {
     public abstract class LogicBallAPI
     {
-        public abstract event EventHandler<LogicEventArgs>? changedPosition;
+        public abstract event EventHandler<LogicEventArgsAPI>? changedPosition;
         public abstract float X { get; set; }
         public abstract float Y { get; set; }
         public abstract float R { get; set; }

@@ -31,6 +31,6 @@ namespace PresentationModel
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-        public abstract void UpdateBallModel(Object s, LogicEventArgs e);
+        public abstract void UpdateBallModel(Object s, LogicEventArgsAPI e);
     }
 }

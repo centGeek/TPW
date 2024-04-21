@@ -3,7 +3,7 @@ using System.Numerics;
 
 namespace Data
 {
-    public class Ball : BallAPI
+    internal class Ball : BallAPI
     {
         private Vector2 _position { get; set; }
         private Vector2 _speed { get; set; }
@@ -34,7 +34,7 @@ namespace Data
         {
             return _r;
         }
-        public override event EventHandler<DataEventArgs> ChangedPosition;
+        public override event EventHandler<DataEventArgsAPI> ChangedPosition;
 
         public Ball(Vector2 position, int r, Vector2 speed)
         {

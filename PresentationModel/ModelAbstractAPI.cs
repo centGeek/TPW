@@ -20,7 +20,7 @@ namespace PresentationModel
         public abstract void StartSimulation();
         public abstract void StopSimulation();
 
-        public static Model CreateNewModel(int w, int h)
+        public static ModelAbstractAPI CreateNewModel(int w, int h)
         {
             return new Model(w, h);
         }

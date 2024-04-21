@@ -81,13 +81,14 @@ namespace PresentationViewModel
             {
                 ballModelAPIs.Add(modelAPI);
             }
+            Debug.WriteLine($"W modelu posiadam {ballModelAPIs.Count()}");
             OnPropertyChanged();
         }
         private void StopTheSimulation()
         {
             _modelAbstractAPI.StopSimulation();
+            ballModelAPIs.Clear();
             OnPropertyChanged();
-
         }
 
         public ICommand CommandAddOneToNumOfBalls { get; private set; }
@@ -101,7 +102,7 @@ namespace PresentationViewModel
         {
             ballModelAPIs = new ObservableCollection<BallModelAPI>();
             _modelAbstractAPI = ModelAbstractAPI.CreateNewModel(380, 380);
-            _modelAbstractAPI._numOfBalls = 15;
+            _modelAbstractAPI._numOfBalls = 5;
             CommandAddOneToNumOfBalls = new RelayCommand(AddOneToNumOfBalls);
             CommandSubtractOneToNumOfBalls = new RelayCommand(SubtractOneToNumOfBalls);
             CommandStartTheSimulation = new RelayCommand(StartTheSimulation);

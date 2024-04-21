@@ -17,7 +17,7 @@ namespace Data
         public abstract int getR();
 
 
-        public abstract event EventHandler<DataEventArgs> ChangedPosition;
+        public abstract event EventHandler<DataEventArgsAPI> ChangedPosition;
 
         public static BallAPI CreateBall(float X, float Y, float X_speed, float Y_speed, int radius)
         {
@@ -30,6 +30,4 @@ namespace Data
             throw new NotImplementedException();
         }
     }
-
-
 }

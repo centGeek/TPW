@@ -4,9 +4,10 @@ using System.Text;
 
 namespace Logic
 {
-    public class LogicEventArgs
+    internal class LogicEventArgs : LogicEventArgsAPI
     {
         public LogicBallAPI ball;
+
         public LogicEventArgs(LogicBallAPI ball)
         {
             this.ball = ball;

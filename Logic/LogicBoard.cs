@@ -1,8 +1,13 @@
 ﻿using Data;
 using System.Diagnostics;
+//using System.Threading.Tasks;
+using System.Timers;
+using Timer = System.Timers.Timer;
+
 namespace Logic
+
 {
-    public class LogicBoard : LogicBoardAPI
+    internal class LogicBoard : LogicBoardAPI
     {
         private int _height { get; set; }
         private int _width { get; set; }
@@ -62,27 +67,27 @@ namespace Logic
             }
         }
 
-        public int GetHeight()
+        public override int GetHeight()
         {
             return _height;
         }
 
-        public void SetHeight(int height)
+        public override void SetHeight(int height)
         {
             _height = height;
         }
 
-        public int GetWidth()
+        public override int GetWidth()
         {
             return _width;
         }
 
-        public void SetWidth(int width)
+        public override void SetWidth(int width)
         {
             _width = width;
         }
 
-        public override void checkBorderCollision(Object s, DataEventArgs e)
+        public override void checkBorderCollision(Object s, DataEventArgsAPI e)
         {
             BallAPI ball = (BallAPI)s;
             bool isCorrectInX = (ball.getPosition().X + ball.getR() + ball.getSpeed().X < _maxX /*- 2 * ball.getR()*/) && (ball.getPosition().X + ball.getSpeed().X /*- ball.getR()*/ > 0);
@@ -100,23 +105,63 @@ namespace Logic
         public override void removeBalls()
         {
             isMoving = false;
+            Thread.Sleep(80);
             _balls.Clear();
+            ballAPIs.Clear();
         }
-        public override void startMoving()
+        /*public override void startMoving()
         {
+            Debug.WriteLine($"Przed ruchem było tyle kulek {ballAPIs.Count()}");
             isMoving = true;
-            Task.Run(() =>
+            Task t = Task.Run(() =>
             {
+                long i = 0;
                 while (isMoving)
                 {
                     foreach (BallAPI kula in ballAPIs)
                     {
-                        kula.MakeMove(_maxX, _maxY);
-                        Thread.Sleep(3);
-                    }
-                }
-            });
-        }
-    }
+                        if (isMoving)
+                        {
+                            kula.MakeMove(_maxX, _maxY);
 
+                        }
+                        kula.MakeMove(_maxX, _maxY);
+                        Thread.Sleep(1);
+                    }
+                    i++;
+                    //Debug.WriteLine($"{i}");
+                }
+                Debug.WriteLine("Koniec petli, umieram");
+            });
+
+            if (t.IsCompleted)
+            {
+                Debug.WriteLine("Chyba udało sie zabic to ");
+            }
+        }*/
+        public override void startMoving()
+        {
+            isMoving = true;
+            foreach (BallAPI ball in ballAPIs)
+            {
+                Task.Run(() =>
+                {
+                    while (isMoving)
+                    {
+                        ball.MakeMove(_maxX, _maxY);
+                        Thread.Sleep(4);
+                    }
+                });
+
+            }
+        }
+        private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        {
+            BallAPI temp = (BallAPI)source;
+            temp.MakeMove(_maxX, _maxY);
+        }
+
+
+
+    }
 }
