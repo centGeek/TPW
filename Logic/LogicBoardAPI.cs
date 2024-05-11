@@ -18,6 +18,8 @@ namespace Logic
         }
         public abstract void checkBorderCollision(Object s, DataEventArgsAPI e);
 
+        public abstract void CheckBallCollisions(Object s, DataEventArgsAPI e);
+
         public abstract void removeBalls();
 
         public abstract void startMoving();

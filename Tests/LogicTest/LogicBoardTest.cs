@@ -16,8 +16,8 @@ namespace LogicTest
         [TestClass]
         internal class DataBoardForTest : BoardAPI
         {
-            public override int Width { get; set; }
-            public override int Height { get; set; }
+            public override int Width { get; }
+            public override int Height { get; }
 
             private List<BallAPI> Balls = new List<BallAPI>();
             public DataBoardForTest(int width, int height)
@@ -38,7 +38,10 @@ namespace LogicTest
                 return Balls;
             }
 
-
+            public override void RemoveAllBalls()
+            {
+                Balls.Clear();
+            }
         }
 
 

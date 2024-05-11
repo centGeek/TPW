@@ -40,17 +40,16 @@ namespace PresentationModel
                 logicBall.changedPosition += ballModelAPI.UpdateBallModel;
                 _ballsModel.Add(ballModelAPI);
             }
-            _logicAPI.startMoving();
+            //_logicAPI.startMoving();
 
 
         }
 
         public override void StopSimulation()
         {
-
             _logicAPI.removeBalls();
             _ballsModel.Clear();
-
+            //_numOfBalls = 0;
         }
 
 

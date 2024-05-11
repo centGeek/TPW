@@ -1,6 +1,8 @@
 ﻿using Data;
 using System.ComponentModel;
 using System.Diagnostics;
+using System.Numerics;
+
 //using System.Threading.Tasks;
 using System.Timers;
 using Timer = System.Timers.Timer;
@@ -59,7 +61,9 @@ namespace Logic
                 LogicBall ball = new LogicBall(dataBall.getPosition().X, dataBall.getPosition().Y, ballRadius);
 
 
+
                 dataBall.ChangedPosition += ball.UpdateBall;
+                dataBall.ChangedPosition += CheckBallCollisions;
                 dataBall.ChangedPosition += checkBorderCollision;
 
                 ballAPIs.Add(dataBall);
@@ -68,9 +72,48 @@ namespace Logic
             }
         }
 
-        public void CheckBallCollisions(object sender, PropertyChangedEventArgs e)
-        {   //TODO tutaj sobie wracam jutro
-            BallAPI ball = (BallAPI)sender;
+        public override void CheckBallCollisions(object s, DataEventArgsAPI e)
+        {
+            BallAPI ball = (BallAPI)s;
+            List<BallAPI> collidingBalls = new List<BallAPI>();
+            Monitor.Enter(ball.GetLockedObject());
+            try
+            {
+                foreach (BallAPI otherBall in dataAPI.GetAllBalls())
+                {
+                    //Zwykły Pitagoras z "wyprzedzeniem" ruchu
+                    double distance = Math.Sqrt(Math.Pow(ball.getPosition().X + ball.getSpeed().X - (otherBall.getPosition().X + otherBall.getSpeed().X), 2)
+                                    + Math.Pow(ball.getPosition().Y + ball.getSpeed().Y - (otherBall.getPosition().Y + otherBall.getSpeed().Y), 2));
+                    if (otherBall != ball && distance <= ball.getR())
+                    {
+                        collidingBalls.Add(otherBall);
+                    }
+                }
+                foreach (BallAPI otherBall in collidingBalls)
+                {
+                    Debug.WriteLine("Dochodzi do zderzenia");
+                    float otherBallXSpeed = otherBall.getSpeed().X * (otherBall.Mass - ball.Mass) / (otherBall.Mass + ball.Mass)
+                                            + ball.Mass * ball.getSpeed().X * 2f / (otherBall.Mass + ball.Mass);
+                    float otherBallYSpeed = otherBall.getSpeed().Y * (otherBall.Mass - ball.Mass) / (otherBall.Mass + ball.Mass)
+                                            + ball.Mass * ball.getSpeed().Y * 2f / (otherBall.Mass + ball.Mass);
+
+                    float ballXSpeed = ball.getSpeed().X * (ball.Mass - otherBall.Mass) / (ball.Mass + ball.Mass)
+                                        + otherBall.Mass * otherBall.getSpeed().X * 2f / (ball.Mass + otherBall.Mass);
+                    float ballYSpeed = ball.getSpeed().Y * (ball.Mass - otherBall.Mass) / (ball.Mass + ball.Mass)
+                                        + otherBall.Mass * otherBall.getSpeed().Y * 2f / (ball.Mass + otherBall.Mass);
+
+                    otherBall.setSpeed(otherBallXSpeed, otherBallYSpeed);
+                    ball.setSpeed(ballXSpeed, ballYSpeed);
+                }
+            }
+            catch (SynchronizationLockException exception)
+            {
+                throw new Exception("Synchronization lock not working", exception);
+            }
+            finally
+            {
+                Monitor.Exit(ball.GetLockedObject());
+            }
         }
 
         public override int GetHeight()
@@ -96,8 +139,8 @@ namespace Logic
         public override void checkBorderCollision(Object s, DataEventArgsAPI e)
         {
             BallAPI ball = (BallAPI)s;
-            bool isCorrectInX = (ball.getPosition().X + ball.getR() + ball.getSpeed().X < _maxX /*- 2 * ball.getR()*/) && (ball.getPosition().X + ball.getSpeed().X /*- ball.getR()*/ > 0);
-            bool isCorrectInY = (ball.getPosition().Y + ball.getR() + ball.getSpeed().Y < _maxY /*- 2 * ball.getR()*/) && (ball.getPosition().Y + ball.getSpeed().Y /*- ball.getR()*/ > 0);
+            bool isCorrectInX = (ball.getPosition().X + ball.getR() + ball.getSpeed().X < _maxX) && (ball.getPosition().X + ball.getSpeed().X > 0);
+            bool isCorrectInY = (ball.getPosition().Y + ball.getR() + ball.getSpeed().Y < _maxY) && (ball.getPosition().Y + ball.getSpeed().Y > 0);
             if (!isCorrectInX)
             {
                 ball.setSpeed(-ball.getSpeed().X, ball.getSpeed().Y);
@@ -110,10 +153,10 @@ namespace Logic
 
         public override void removeBalls()
         {
-            isMoving = false;
-            Thread.Sleep(80);
+            dataAPI.RemoveAllBalls();
             _balls.Clear();
             ballAPIs.Clear();
+            Debug.WriteLine($"Logika po wyczyszczeniu sadzi ze ma {_balls.Count} a z modelu {ballAPIs.Count}");
         }
         /*public override void startMoving()
         {
@@ -154,18 +197,18 @@ namespace Logic
                 {
                     while (isMoving)
                     {
-                        ball.MakeMove(_maxX, _maxY);
-                        Thread.Sleep(4);
+                        //ball.MakeMove(_maxX, _maxY);
+                        Thread.Sleep(15);
                     }
                 });
 
             }
         }
-        private void OnTimedEvent(Object source, ElapsedEventArgs e)
-        {
-            BallAPI temp = (BallAPI)source;
-            temp.MakeMove(_maxX, _maxY);
-        }
+        //private void OnTimedEvent(Object source, ElapsedEventArgs e)
+        //{
+        //   BallAPI temp = (BallAPI)source;
+        //    temp.MakeMove();
+        //}
 
 
 

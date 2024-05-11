@@ -14,7 +14,11 @@ namespace Data
         public abstract void setSpeed(float x, float y);
         public abstract Vector2 getSpeed();
         public abstract int getR();
+        public abstract bool _isMoving { get; set; }
 
+        public abstract int Mass { get; }
+
+        public abstract object GetLockedObject();
 
         public abstract event EventHandler<DataEventArgsAPI> ChangedPosition;
 
@@ -22,8 +26,6 @@ namespace Data
         {
             return new Ball(new Vector2(X, Y), radius, new Vector2(X_speed, Y_speed));
         }
-        public abstract void MakeMove(int width, int height);
-
         public void RaisePropertyChanged(string v)
         {
             throw new NotImplementedException();

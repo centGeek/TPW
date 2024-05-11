@@ -12,9 +12,13 @@ namespace DataTest
         {
             public override event EventHandler<DataEventArgsAPI> ChangedPosition;
 
+            private object lockedObject;
             private Vector2 _position { get; set; }
             private Vector2 _speed { get; set; }
             private int _r { get; set; }
+
+            public override int Mass { get; }
+            public override bool _isMoving { get; set; }
 
             private int _maxX = 370;
             private int _maxY = 370;
@@ -31,19 +35,18 @@ namespace DataTest
             {
                 return _speed;
             }
-            public override void MakeMove(int width, int height)
-            {
-                _position = _position + _speed;
-            }
-            public override void setPosition(float x, float y)
-            {
-                _position = new Vector2(x, y);
-            }
+
 
             public override void setSpeed(float x, float y)
             {
                 _speed = new Vector2(x, y);
             }
+
+            public override object GetLockedObject()
+            {
+                return lockedObject;
+            }
+
             public DataBallForTest()
             {
 
@@ -52,8 +55,8 @@ namespace DataTest
         [TestClass]
         internal class DataBoardForTest : BoardAPI
         {
-            public override int Width { get; set; }
-            public override int Height { get; set; }
+            public override int Width { get; }
+            public override int Height { get; }
 
             private List<BallAPI> Balls = new List<BallAPI>();
             public DataBoardForTest(int width, int height)
@@ -74,7 +77,10 @@ namespace DataTest
                 return Balls;
             }
 
-
+            public override void RemoveAllBalls()
+            {
+                Balls.Clear();
+            }
         }
 
         [TestMethod]
