@@ -11,7 +11,6 @@ namespace Data
     public abstract class BallAPI
     {
         public abstract Vector2 getPosition();
-        public abstract void setPosition(float x, float y);
         public abstract void setSpeed(float x, float y);
         public abstract Vector2 getSpeed();
         public abstract int getR();

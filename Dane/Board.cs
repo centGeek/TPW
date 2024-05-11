@@ -8,8 +8,8 @@ namespace Data
 {
     internal class Board : BoardAPI
     {
-        public override int Width { get; set; }
-        public override int Height { get; set; }
+        public override int Width { get; }
+        public override int Height { get; }
 
         private List<BallAPI> Balls = new List<BallAPI>();
         public Board(int width, int height)

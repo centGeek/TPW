@@ -9,17 +9,14 @@ namespace Data
         private Vector2 _speed { get; set; }
         private int _r { get; set; }
 
-        private int _maxX = 370;
-        private int _maxY = 370;
+        //private int _maxX = 370;
+        //private int _maxY = 370;
 
         public override Vector2 getPosition()
         {
             return _position;
         }
-        public override void setPosition(float x, float y)
-        {
-            _position = new Vector2(x, y);
-        }
+
         public override Vector2 getSpeed()
         {
             return _speed;
@@ -53,9 +50,9 @@ namespace Data
         // (0, 350), (0,350)
 
         {
-            bool isCorrectInX = (this.getPosition().X + this.getR() + this.getSpeed().X < _maxX /*- 2 * getR()*/) && (this.getPosition().X + this.getSpeed().X /*- this.getR()*/ > 0);
-            bool isCorrectInY = (this.getPosition().Y + this.getR() + this.getSpeed().Y < _maxY /*- 2 * getR()*/) && (this.getPosition().Y + this.getSpeed().Y /*- this.getR()*/ > 0);
-            if (!isCorrectInX)
+            //bool isCorrectInX = (this.getPosition().X + this.getR() + this.getSpeed().X < _maxX /*- 2 * getR()*/) && (this.getPosition().X + this.getSpeed().X /*- this.getR()*/ > 0);
+            //bool isCorrectInY = (this.getPosition().Y + this.getR() + this.getSpeed().Y < _maxY /*- 2 * getR()*/) && (this.getPosition().Y + this.getSpeed().Y /*- this.getR()*/ > 0);
+            /*if (!isCorrectInX)
             {
                 this.setSpeed(-this.getSpeed().X, this.getSpeed().Y);
 
@@ -63,8 +60,7 @@ namespace Data
             if (!isCorrectInY)
             {
                 this.setSpeed(this.getSpeed().X, -this.getSpeed().Y);
-
-            }
+            }*/
 
             _position += _speed;
             DataEventArgs args = new DataEventArgs(this);

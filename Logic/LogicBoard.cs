@@ -1,4 +1,5 @@
 ﻿using Data;
+using System.ComponentModel;
 using System.Diagnostics;
 //using System.Threading.Tasks;
 using System.Timers;
@@ -65,6 +66,11 @@ namespace Logic
 
                 _balls.Add(ball);
             }
+        }
+
+        public void CheckBallCollisions(object sender, PropertyChangedEventArgs e)
+        {   //TODO tutaj sobie wracam jutro
+            BallAPI ball = (BallAPI)sender;
         }
 
         public override int GetHeight()
