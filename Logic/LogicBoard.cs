@@ -20,7 +20,6 @@ namespace Logic
         private int _maxX = 370;
         private int _maxY = 370;
 
-
         public LogicBoard(BoardAPI boardAPI)
         {
             this._height = boardAPI.Height;
@@ -236,8 +235,5 @@ namespace Logic
         //   BallAPI temp = (BallAPI)source;
         //    temp.MakeMove();
         //}
-
-
-
     }
 }
