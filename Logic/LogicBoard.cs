@@ -173,7 +173,6 @@ namespace Logic
             {
                 Monitor.Enter(ballAPIs[0].GetLockedObject());
                 dataAPI.RemoveAllBalls();
-                Thread.Sleep(100);
                 Monitor.Exit(ballAPIs[0].GetLockedObject());
                 _balls.Clear();
                 ballAPIs.Clear();
