@@ -39,12 +39,25 @@ namespace Logic
 
         public override void addBalls(int ballsQuantity, int ballRadius)
         {
+            BallAPI lockBall = null;
             for (int i = 0; i < ballsQuantity; i++)
             {
                 Random random = new Random();
+                bool wrongPlacement = false; //flaga informujaca o nachodzacych kulach
                 float x = random.Next(0, _height - ballRadius);
                 float y = random.Next(0, _width - ballRadius);
-
+                foreach (LogicBall otherBall in _balls)
+                {
+                    double distance = Math.Sqrt(Math.Pow(x - (otherBall.X), 2)
+                                    + Math.Pow(y - (otherBall.Y), 2));
+                    if (distance <= ballRadius)
+                    {
+                        Debug.WriteLine("Wykryto błedne początkowe położenie");
+                        wrongPlacement = true;
+                        break;
+                    }
+                }
+                if (wrongPlacement) { i--; continue; } //Dzieki temu kule nie powinny pojawiać się w sobie
                 int SpeedX;
                 do
                 {
@@ -59,8 +72,11 @@ namespace Logic
 
                 BallAPI dataBall = dataAPI.AddBall(x, y, SpeedX, SpeedY, ballRadius);
                 LogicBall ball = new LogicBall(dataBall.getPosition().X, dataBall.getPosition().Y, ballRadius);
-
-
+                if (i == 0)
+                {
+                    lockBall = dataBall;
+                    Monitor.Enter(lockBall.GetLockedObject());
+                }
 
                 dataBall.ChangedPosition += ball.UpdateBall;
                 dataBall.ChangedPosition += CheckBallCollisions;
@@ -70,6 +86,7 @@ namespace Logic
 
                 _balls.Add(ball);
             }
+            Monitor.Exit(lockBall.GetLockedObject());
         }
 
         public override void CheckBallCollisions(object s, DataEventArgsAPI e)
@@ -153,10 +170,20 @@ namespace Logic
 
         public override void removeBalls()
         {
-            dataAPI.RemoveAllBalls();
-            _balls.Clear();
-            ballAPIs.Clear();
-            Debug.WriteLine($"Logika po wyczyszczeniu sadzi ze ma {_balls.Count} a z modelu {ballAPIs.Count}");
+            if (ballAPIs.Count() >= 1)
+            {
+                Monitor.Enter(ballAPIs[0].GetLockedObject());
+                dataAPI.RemoveAllBalls();
+                Thread.Sleep(100);
+                Monitor.Exit(ballAPIs[0].GetLockedObject());
+                _balls.Clear();
+                ballAPIs.Clear();
+                Debug.WriteLine($"Logika po wyczyszczeniu sadzi ze ma {_balls.Count} a z modelu {ballAPIs.Count}");
+            }
+            else
+            {
+                Debug.WriteLine("Nie było nic do czyszcenia.");
+            }
         }
         /*public override void startMoving()
         {

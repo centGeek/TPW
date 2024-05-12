@@ -75,7 +75,6 @@ namespace Data
 
         private void StartMoving()
         {
-            Thread.Sleep(100); //To pozwala programowi na szybszą inicjalizacje wszystkich kul
             while (_isMoving)
             {
                 Thread.Sleep(10);
