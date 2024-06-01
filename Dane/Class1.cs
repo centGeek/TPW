@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Data
 {
-    public abstract class DataEventArgsAPI
+    public abstract class DataEventArgsAPI : EventArgs
     {
         public static DataEventArgsAPI CreateDataEventArgs(BallAPI ball)
         {

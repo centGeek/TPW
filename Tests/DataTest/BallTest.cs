@@ -15,12 +15,12 @@ namespace DataTest
         public void GetterSetterConstuctorTest()
         {
             BallAPI ball = BallAPI.CreateBall(3, 5, 0, 0, 3);
-            Assert.AreEqual(new Vector2(3, 5), ball.getPosition());
+            Assert.AreEqual(new PositionOfBall(3, 5), ball.getPosition());
             Assert.AreEqual(3, ball.getR());
 
             ball.setSpeed(3, 2);
 
-            Assert.AreEqual(new Vector2(3, 2), ball.getSpeed());
+            Assert.AreEqual(new SpeedOfBall(3, 2), ball.getSpeed());
         }
         [TestMethod]
         public void creatingBallTest()

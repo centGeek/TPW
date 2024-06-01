@@ -10,9 +10,9 @@ namespace Data
 {
     public abstract class BallAPI
     {
-        public abstract Vector2 getPosition();
+        public abstract PositionOfBall getPosition();
         public abstract void setSpeed(float x, float y);
-        public abstract Vector2 getSpeed();
+        public abstract SpeedOfBall getSpeed();
         public abstract int getR();
         public abstract bool _isMoving { get; set; }
 
@@ -31,4 +31,9 @@ namespace Data
             throw new NotImplementedException();
         }
     }
+    public record PositionOfBall(float X, float Y);
+
+    public record SpeedOfBall(float X, float Y);
+
+
 }

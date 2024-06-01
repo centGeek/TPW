@@ -23,17 +23,17 @@ namespace DataTest
             private int _maxX = 370;
             private int _maxY = 370;
 
-            public override Vector2 getPosition()
+            public override PositionOfBall getPosition()
             {
-                return _position;
+                return new PositionOfBall(_position.X, _position.Y);
             }
             public override int getR()
             {
                 return _r;
             }
-            public override Vector2 getSpeed()
+            public override SpeedOfBall getSpeed()
             {
-                return _speed;
+                return new SpeedOfBall(_speed.X, _speed.Y);
             }
 
 

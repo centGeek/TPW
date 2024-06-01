@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Logic
 {
-    public abstract class LogicEventArgsAPI
+    public abstract class LogicEventArgsAPI : EventArgs
     {
         private LogicBallAPI ball;
         public static LogicEventArgsAPI CreateLogicEventArgs(LogicBallAPI ball)

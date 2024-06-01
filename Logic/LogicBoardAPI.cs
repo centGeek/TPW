@@ -21,9 +21,6 @@ namespace Logic
         public abstract void CheckBallCollisions(Object s, DataEventArgsAPI e);
 
         public abstract void removeBalls();
-
-        public abstract void startMoving();
-
         public abstract int GetHeight();
         public abstract int GetWidth();
         public abstract void SetWidth(int width);
