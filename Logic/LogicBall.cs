@@ -16,12 +16,12 @@ namespace Logic
 
         public override event EventHandler<LogicEventArgsAPI>? changedPosition;
 
-        public void UpdateBall(Object s, DataEventArgsAPI e)
+        internal void UpdateBall(Object s, DataEventArgsAPI e)
         {
             BallAPI ball = (BallAPI)s;
-            _x = ball.getPosition().X;
-            _y = ball.getPosition().Y;
-            _r = ball.getR();
+            _x = e.positionOfBall.X;
+            _y = e.positionOfBall.Y;
+            _r = e.radius;
             LogicEventArgsAPI args = LogicEventArgs.CreateLogicEventArgs(this);
             changedPosition?.Invoke(this, args);
         }

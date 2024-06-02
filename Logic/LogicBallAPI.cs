@@ -13,7 +13,6 @@ namespace Logic
         public abstract float Y { get; set; }
         public abstract float R { get; set; }
 
-
         public static LogicBallAPI CreateBall(int xPosition, int yPosition, int r)
         {
             return new LogicBall(xPosition, yPosition, r);

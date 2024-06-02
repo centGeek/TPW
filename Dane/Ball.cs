@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Numerics;
+using System.Runtime.Versioning;
 
 namespace Data
 {
@@ -7,9 +8,9 @@ namespace Data
     {
         private Vector2 _position { get; set; }
         private Vector2 _speed { get; set; }
-        private int _r { get; }
-        private int _m { get; }
-        public override bool _isMoving { get; set; }
+        private readonly int _r;
+        private const int _m = 5;
+        public override bool IsMoving { get; set; }
 
         public override int Mass { get { return _m; } }
 
@@ -47,14 +48,13 @@ namespace Data
 
         public Ball(Vector2 position, int r, Vector2 speed)
         {
-            _m = 5;
             _speed = speed;
             _position = position;
             _r = r;
             _stopwatch = new Stopwatch();
             Thread thread = new Thread(StartMoving);
             thread.Start();
-            _isMoving = true;
+            IsMoving = true;
         }
         public Ball(Vector2 position, int r)
         {
@@ -63,7 +63,7 @@ namespace Data
             _r = r;
         }
 
-        private void MakeMove()
+        private void MakeMove(long time)
         // (0, 350), (0,350)
         //TODO zrobić rekord który będzie tworzony przy tym DataEventArgs a potem z niego brać pozycję
         //Przy pobieraniu pozycji ze wszystkich kul też najlepiej brać rekord a nie, osobno X oraz Y
@@ -71,9 +71,9 @@ namespace Data
             Monitor.Enter(this.GetLockedObject());
             try
             {
-                DataEventArgs args = new DataEventArgs(this);
+                DataEventArgs args = new DataEventArgs(this.getPosition(), this.getSpeed(), this._r);
                 ChangedPosition?.Invoke(this, args);
-                _position += _speed;
+                _position += _speed * (time);
             }
             catch (SynchronizationLockException exception)
             {
@@ -89,20 +89,43 @@ namespace Data
         {
             //Mniej wiecej tutaj stopwatch zrobic, i to odejmowac od siebie poprzednie
             //i zapamietywac a nie ze resetujemy clock
-
-
             //Concurent QUEUE albo coś takiego?
-
             //Cos o jakims typie lazy ???
 
-            while (_isMoving)
+
+
+
+
+            //Aby symulacja nie przebiegała zbyt szybko będziemy dzielić nasz czas przez 10
+            //Oznacza to że nasza prędkość w kuli wyrażona jest w: długośćWData/10milisekund
+            _stopwatch.Restart();
+            _stopwatch.Start();
+            long prevTime = _stopwatch.ElapsedMilliseconds / 10;
+
+            while (IsMoving)
             {
-                Thread.Sleep(10);
-                MakeMove();
+                SpeedOfBall mySpeed = this.getSpeed();
+                Thread.Sleep(calculateTimeToSleep());
+                long time = _stopwatch.ElapsedMilliseconds / 10;
+                MakeMove(time - prevTime);
+                prevTime = time;
             }
         }
 
+        private int calculateTimeToSleep()
+        {
+            double calc = 0;
+            SpeedOfBall speed = this.getSpeed();
+            calc = Math.Sqrt(Math.Pow(speed.X, 2) + Math.Pow(speed.Y, 2));
 
+            calc = 5 / calc; //Ile zajmie przemieszczenie się przez 5 jednostek
+
+            if (calc < 2)
+            {
+                return 2;
+            }
+            else return (int)calc;
+        }
 
         public override object GetLockedObject()
         {

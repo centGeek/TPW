@@ -56,14 +56,14 @@ namespace Logic
                         break;
                     }
                 }
-                if (wrongPlacement) { i--; continue; } //Dzieki temu kule nie powinny pojawiać się w sobie
                 int SpeedX;
+                int SpeedY;
+
+                if (wrongPlacement) { i--; continue; } //Dzieki temu kule nie powinny pojawiać się w sobie
                 do
                 {
                     SpeedX = random.Next(-3, 3);
                 } while (SpeedX == 0);
-
-                int SpeedY;
                 do
                 {
                     SpeedY = random.Next(-3, 3);
@@ -80,10 +80,12 @@ namespace Logic
                     lockBall = dataBall;
                     Monitor.Enter(lockBall.GetLockedObject());
                 }
-                //TODO to zmienić na jedną metodę nie wiemy czy nam się nie pogubi
+
+
+                dataBall.ChangedPosition += AllChecksInOne;
+                //Nie da się tego wrzucić do AllCheck bo jest tu kula z logiki
                 dataBall.ChangedPosition += ball.UpdateBall;
-                dataBall.ChangedPosition += CheckBallCollisions;
-                dataBall.ChangedPosition += checkBorderCollision;
+
 
                 ballAPIs.Add(dataBall);
 
@@ -91,16 +93,20 @@ namespace Logic
             }
             Monitor.Exit(lockBall.GetLockedObject());
         }
-
-        public override void CheckBallCollisions(object s, DataEventArgsAPI e)
+        private void AllChecksInOne(object s, DataEventArgsAPI e)
+        {
+            CheckBallCollisions(s, e);
+            checkBorderCollision(s, e);
+        }
+        private void CheckBallCollisions(object s, DataEventArgsAPI e)
         {
             BallAPI ball = (BallAPI)s;
             List<BallAPI> collidingBalls = new List<BallAPI>();
             Monitor.Enter(ball.GetLockedObject());
             try
             {
-                PositionOfBall ballPosition = ball.getPosition();
-                SpeedOfBall ballSpeed = ball.getSpeed();
+                PositionOfBall ballPosition = e.positionOfBall;
+                SpeedOfBall ballSpeed = e.speedOfBall;
 
 
                 foreach (BallAPI otherBall in dataAPI.GetAllBalls())
@@ -115,7 +121,7 @@ namespace Logic
 
                     double distance = Math.Sqrt(Math.Pow(ballPosition.X + ballSpeed.X - (otherBallPosition.X + otherBallSpeed.X), 2)
                                     + Math.Pow(ballPosition.Y + ballSpeed.Y - (otherBallPosition.Y + otherBallSpeed.Y), 2));
-                    if (otherBall != ball && distance <= ball.getR())
+                    if (otherBall != ball && distance <= e.radius)
                     {
                         collidingBalls.Add(otherBall);
                     }
@@ -126,7 +132,7 @@ namespace Logic
                     SpeedOfBall otherBallSpeed = otherBall.getSpeed();
 
 
-                    Debug.WriteLine("Dochodzi do zderzenia");
+                    //Debug.WriteLine("Dochodzi do zderzenia");
                     float otherBallXSpeed = otherBallSpeed.X * (otherBall.Mass - ball.Mass) / (otherBall.Mass + ball.Mass)
                                             + ball.Mass * ballSpeed.X * 2f / (otherBall.Mass + ball.Mass);
                     float otherBallYSpeed = otherBallSpeed.Y * (otherBall.Mass - ball.Mass) / (otherBall.Mass + ball.Mass)
@@ -171,15 +177,16 @@ namespace Logic
             _width = width;
         }
 
-        public override void checkBorderCollision(Object s, DataEventArgsAPI e)
+        private void checkBorderCollision(Object s, DataEventArgsAPI e)
         {
             BallAPI ball = (BallAPI)s;
 
-            PositionOfBall ballPosition = ball.getPosition();
-            SpeedOfBall ballSpeed = ball.getSpeed();
+            PositionOfBall ballPosition = e.positionOfBall;
+            SpeedOfBall ballSpeed = e.speedOfBall;
+            int r = e.radius;
 
-            bool isCorrectInX = (ballPosition.X + ball.getR() + ballSpeed.X < _maxX) && (ballPosition.X + ballSpeed.X > 0);
-            bool isCorrectInY = (ballPosition.Y + ball.getR() + ballSpeed.Y < _maxY) && (ballPosition.Y + ballSpeed.Y > 0);
+            bool isCorrectInX = (ballPosition.X + r + ballSpeed.X < _maxX) && (ballPosition.X + ballSpeed.X > 0);
+            bool isCorrectInY = (ballPosition.Y + r + ballSpeed.Y < _maxY) && (ballPosition.Y + ballSpeed.Y > 0);
             if (!isCorrectInX)
             {
                 ball.setSpeed(-ballSpeed.X, ballSpeed.Y);

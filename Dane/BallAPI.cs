@@ -14,7 +14,7 @@ namespace Data
         public abstract void setSpeed(float x, float y);
         public abstract SpeedOfBall getSpeed();
         public abstract int getR();
-        public abstract bool _isMoving { get; set; }
+        public abstract bool IsMoving { get; set; }
 
         public abstract int Mass { get; }
 

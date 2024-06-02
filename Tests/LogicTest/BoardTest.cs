@@ -18,7 +18,7 @@ namespace DataTest
             private int _r { get; set; }
 
             public override int Mass { get; }
-            public override bool _isMoving { get; set; }
+            public override bool IsMoving { get; set; }
 
             private int _maxX = 370;
             private int _maxY = 370;
