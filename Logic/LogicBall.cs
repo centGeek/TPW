@@ -34,17 +34,14 @@ namespace Logic
         public override float X
         {
             get => _x;
-            set { _x = value; }
         }
         public override float Y
         {
             get => _y;
-            set { _y = value; }
         }
         public override float R
         {
             get => _r;
-            set { _r = value; }
         }
 
     }

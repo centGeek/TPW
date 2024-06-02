@@ -15,9 +15,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PresentationView", "Present
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{49AE8B2A-F5B5-4AF9-894B-BB90097E3F8D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LogicTest", "Tests\LogicTest\LogicTest.csproj", "{9576CEE9-FAC2-40CB-8FFB-628FE716136F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LogicTest", "Tests\LogicTest\LogicTest.csproj", "{9576CEE9-FAC2-40CB-8FFB-628FE716136F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataTest", "Tests\DataTest\DataTest.csproj", "{28602F8D-149F-463E-9D51-E3E4B31D5C5D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataTest", "Tests\DataTest\DataTest.csproj", "{28602F8D-149F-463E-9D51-E3E4B31D5C5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Elementy rozwiązania", "Elementy rozwiązania", "{58777213-A6BA-47CD-915C-B5F2051185CA}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

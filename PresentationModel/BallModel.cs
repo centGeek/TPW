@@ -28,17 +28,17 @@ namespace PresentationModel
         public override float X
         {
             get { return logicBall.X; }
-            set { logicBall.X = value; OnPropertyChanged(); }
+            set { OnPropertyChanged(); }
         }
         public override float Y
         {
             get { return logicBall.Y; }
-            set { logicBall.Y = value; OnPropertyChanged(); }
+            set { OnPropertyChanged(); }
         }
         public override float R
         {
             get { return logicBall.R; }
-            set { logicBall.R = value; OnPropertyChanged(); }
+            set { OnPropertyChanged(); }
         }
 
         public override float Scale
