@@ -16,6 +16,7 @@ namespace Data
 
         private static object _lockObject = new object();
         Stopwatch _stopwatch;
+        private DataLogger _logger;
 
         public override PositionOfBall getPosition()
         {
@@ -55,15 +56,10 @@ namespace Data
             Thread thread = new Thread(StartMoving);
             thread.Start();
             IsMoving = true;
-        }
-        public Ball(Vector2 position, int r)
-        {
-            _speed = Vector2.Zero;
-            _position = position;
-            _r = r;
+            _logger = DataLogger.Instance;
         }
 
-        private void MakeMove(long time)
+        private void MakeMove(long timeToClac)
         // (0, 350), (0,350)
         //TODO zrobić rekord który będzie tworzony przy tym DataEventArgs a potem z niego brać pozycję
         //Przy pobieraniu pozycji ze wszystkich kul też najlepiej brać rekord a nie, osobno X oraz Y
@@ -71,9 +67,14 @@ namespace Data
             Monitor.Enter(this.GetLockedObject());
             try
             {
-                DataEventArgs args = new DataEventArgs(this.getPosition(), this.getSpeed(), this._r);
+                PositionOfBall pos = this.getPosition();
+                SpeedOfBall speed = this.getSpeed();
+
+                _logger.Log(pos, speed, this._r, DateTime.UtcNow);
+
+                DataEventArgs args = new DataEventArgs(pos, speed, this._r);
                 ChangedPosition?.Invoke(this, args);
-                _position += _speed * (time);
+                _position += _speed * (timeToClac);
             }
             catch (SynchronizationLockException exception)
             {
@@ -87,14 +88,6 @@ namespace Data
 
         private void StartMoving()
         {
-            //Mniej wiecej tutaj stopwatch zrobic, i to odejmowac od siebie poprzednie
-            //i zapamietywac a nie ze resetujemy clock
-            //Concurent QUEUE albo coś takiego?
-            //Cos o jakims typie lazy ???
-
-
-
-
 
             //Aby symulacja nie przebiegała zbyt szybko będziemy dzielić nasz czas przez 10
             //Oznacza to że nasza prędkość w kuli wyrażona jest w: długośćWData/10milisekund
@@ -110,6 +103,7 @@ namespace Data
                 MakeMove(time - prevTime);
                 prevTime = time;
             }
+            _logger.Stop();
         }
 
         private int calculateTimeToSleep()

@@ -30,6 +30,8 @@ namespace Data
         {
             throw new NotImplementedException();
         }
+
+
     }
     public record PositionOfBall(float X, float Y);
 

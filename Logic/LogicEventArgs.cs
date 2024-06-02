@@ -6,11 +6,11 @@ namespace Logic
 {
     internal class LogicEventArgs : LogicEventArgsAPI
     {
-        public LogicBallAPI ball;
-
-        public LogicEventArgs(LogicBallAPI ball)
+        public LogicEventArgs(float _x, float _y, float _r)
         {
-            this.ball = ball;
+            x = _x;
+            y = _y;
+            r = _r;
         }
     }
 }

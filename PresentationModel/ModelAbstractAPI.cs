@@ -13,6 +13,7 @@ namespace PresentationModel
 {
     public abstract class ModelAbstractAPI : INotifyPropertyChanged
     {
+        internal float _scale;
         public int _numOfBalls;
         public int _height;
         public int _width;

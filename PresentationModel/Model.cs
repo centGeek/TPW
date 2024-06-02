@@ -11,6 +11,7 @@ namespace PresentationModel
     {
         public Model(int w, int h)
         {
+            _scale = 1; //Tu można ustawić skalę
             _height = h;
             _width = w;
             _logicAPI = LogicBoardAPI.CreateAPI();
@@ -36,7 +37,7 @@ namespace PresentationModel
             _logicAPI.addBalls(_numOfBalls, 20);
             foreach (LogicBallAPI logicBall in _logicAPI.getBalls())
             {
-                BallModelAPI ballModelAPI = BallModelAPI.CreateBallModel(logicBall);
+                BallModelAPI ballModelAPI = BallModelAPI.CreateBallModel(logicBall, _scale);
                 logicBall.changedPosition += ballModelAPI.UpdateBallModel;
                 _ballsModel.Add(ballModelAPI);
             }
@@ -67,9 +68,9 @@ namespace PresentationModel
  {
      while (true)
      {
-         //NumOfBalls = r.Next().ToString();
+         //NumOfBalls = _r.Next().ToString();
          Debug.WriteLine($"Kule w model : {_ballsModel.Count}");
-         //Debug.WriteLine($"pierwsza kula ma takie  : x{_ballsModel[0].X}");
+         //Debug.WriteLine($"pierwsza kula ma takie  : _x{_ballsModel[0].X}");
          //_ballsModel[0].X -= 10;
 
          Thread.Sleep(1000);

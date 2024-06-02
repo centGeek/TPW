@@ -37,6 +37,7 @@ namespace Data
             {
                 ball.IsMoving = false;
             }
+
             Balls.Clear();
             Debug.WriteLine($"Według DataBoardAPI po usunieciu kuli jest {Balls.Count}");
         }

@@ -8,10 +8,12 @@ namespace Logic
 {
     public abstract class LogicEventArgsAPI : EventArgs
     {
-        private LogicBallAPI ball;
-        public static LogicEventArgsAPI CreateLogicEventArgs(LogicBallAPI ball)
+        public float x;
+        public float y;
+        public float r;
+        public static LogicEventArgsAPI CreateLogicEventArgs(float x, float y, float r)
         {
-            return new LogicEventArgs(ball);
+            return new LogicEventArgs(x, y, r);
         }
     }
 }

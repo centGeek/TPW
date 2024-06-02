@@ -6,19 +6,21 @@ namespace PresentationModel
 {
     internal class BallModel : BallModelAPI
     {
-        private float x;
-        private float y;
-        private float r;
+        private float _x;
+        private float _y;
+        private float _r;
+        private float _scale;
 
         LogicBallAPI logicBall;
         public BallModel(float x, float y, float r)
         {
-            this.x = x;
-            this.y = y;
-            this.r = r;
+            this._x = x;
+            this._y = y;
+            this._r = r;
         }
-        public BallModel(LogicBallAPI logicBallAPI)
+        public BallModel(LogicBallAPI logicBallAPI, float scale)
         {
+            this._scale = scale;
             logicBall = logicBallAPI;
         }
 
@@ -39,12 +41,16 @@ namespace PresentationModel
             set { logicBall.R = value; OnPropertyChanged(); }
         }
 
+        public override float Scale
+        {
+            get { return _scale; }
+        }
+
         public override void UpdateBallModel(object s, LogicEventArgsAPI e)
         {
-            LogicBallAPI logicBallAPI = (LogicBallAPI)s;
-            X = (float)logicBallAPI.X;
-            Y = (float)logicBallAPI.Y;
-            R = (float)logicBallAPI.R;
+            X = e.x * _scale;
+            Y = e.y * _scale;
+            R = e.r * _scale;
         }
     }
 }

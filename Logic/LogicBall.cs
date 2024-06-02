@@ -22,7 +22,7 @@ namespace Logic
             _x = e.positionOfBall.X;
             _y = e.positionOfBall.Y;
             _r = e.radius;
-            LogicEventArgsAPI args = LogicEventArgs.CreateLogicEventArgs(this);
+            LogicEventArgsAPI args = LogicEventArgs.CreateLogicEventArgs(_x, _y, _r);
             changedPosition?.Invoke(this, args);
         }
         public LogicBall(float x, float y, float r)
