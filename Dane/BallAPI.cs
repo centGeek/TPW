@@ -18,8 +18,6 @@ namespace Data
 
         public abstract int Mass { get; }
 
-        public abstract object GetLockedObject();
-
         public abstract event EventHandler<DataEventArgsAPI> ChangedPosition;
 
         public static BallAPI CreateBall(float X, float Y, float X_speed, float Y_speed, int radius)

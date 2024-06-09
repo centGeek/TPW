@@ -14,9 +14,10 @@ namespace Data
 
         public override int Mass { get { return _m; } }
 
-        private static object _lockObject = new object();
+        private static object _lockObject;
         Stopwatch _stopwatch;
         private DataLogger _logger;
+        internal Guid Id { get; private set; }
 
         public override PositionOfBall getPosition()
         {
@@ -49,6 +50,8 @@ namespace Data
 
         public Ball(Vector2 position, int r, Vector2 speed)
         {
+            Id = Guid.NewGuid();
+            _lockObject = new object();
             _speed = speed;
             _position = position;
             _r = r;
@@ -64,26 +67,27 @@ namespace Data
         //TODO zrobić rekord który będzie tworzony przy tym DataEventArgs a potem z niego brać pozycję
         //Przy pobieraniu pozycji ze wszystkich kul też najlepiej brać rekord a nie, osobno X oraz Y
         {
-            Monitor.Enter(this.GetLockedObject());
-            try
-            {
-                PositionOfBall pos = this.getPosition();
-                SpeedOfBall speed = this.getSpeed();
+            //Monitor.Enter(this.GetLockedObject());
+            //try
+            //{
+            PositionOfBall pos = this.getPosition();
+            SpeedOfBall speed = this.getSpeed();
 
-                _logger.Log(pos, speed, this._r, DateTime.UtcNow);
 
-                DataEventArgs args = new DataEventArgs(pos, speed, this._r);
-                ChangedPosition?.Invoke(this, args);
-                _position += _speed * (timeToClac);
-            }
-            catch (SynchronizationLockException exception)
-            {
-                throw new Exception("Sync of monitor in Ball not working", exception);
-            }
-            finally
-            {
-                Monitor.Exit(_lockObject);
-            }
+            _logger.Log(pos, speed, this._r, DateTime.UtcNow, Id);
+
+            DataEventArgs args = new DataEventArgs(pos, speed, this._r, timeToClac);
+            ChangedPosition?.Invoke(this, args);
+            _position += _speed * (timeToClac);
+            //}
+            //catch (Exception exception)
+            //{
+            //    throw new Exception("Sync of monitor in Ball not working", exception);
+            //}
+            //finally
+            //{
+            //Monitor.Exit(_lockObject);
+            //}
         }
 
         private void StartMoving()
@@ -121,9 +125,6 @@ namespace Data
             else return (int)calc;
         }
 
-        public override object GetLockedObject()
-        {
-            return _lockObject;
-        }
+
     }
 }

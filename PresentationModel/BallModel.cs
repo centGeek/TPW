@@ -35,9 +35,9 @@ namespace PresentationModel
             get { return logicBall.Y; }
             set { OnPropertyChanged(); }
         }
-        public override float R
+        public override float C
         {
-            get { return logicBall.R; }
+            get { return 2 * logicBall.R; }
             set { OnPropertyChanged(); }
         }
 
@@ -50,7 +50,7 @@ namespace PresentationModel
         {
             X = e.x * _scale;
             Y = e.y * _scale;
-            R = e.r * _scale;
+            C = e.r * _scale;
         }
     }
 }

@@ -22,7 +22,7 @@ namespace PresentationModel
         public abstract float Scale { get; }
         public abstract float X { get; set; }
         public abstract float Y { get; set; }
-        public abstract float R { get; set; }
+        public abstract float C { get; set; }
 
 
 

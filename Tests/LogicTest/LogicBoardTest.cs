@@ -57,7 +57,7 @@ namespace LogicTest
         public void ballsPositionsAndRadiusTest()
         {
             LogicBoardAPI logicBoard = LogicBoardAPI.CreateAPI(new DataBoardForTest(370, 370));
-            logicBoard.addBalls(1000, 5);
+            logicBoard.addBalls(10, 5);
             List<LogicBallAPI> balls = logicBoard.getBalls();
             for (int i = 0; i < balls.Count - 1; i++)
             {

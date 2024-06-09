@@ -71,7 +71,7 @@
             </ItemsControl.ItemContainerStyle>
             <ItemsControl.ItemTemplate>
                 <DataTemplate>
-                    <Ellipse Height="{Binding R}" Width="{Binding R}" Stroke="BlanchedAlmond" Fill="Green"/>
+                    <Ellipse Height="{Binding C}" Width="{Binding C}" Stroke="BlanchedAlmond" Fill="Green"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
         </ItemsControl>

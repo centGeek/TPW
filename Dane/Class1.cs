@@ -11,10 +11,11 @@ namespace Data
         public PositionOfBall positionOfBall;
         public SpeedOfBall speedOfBall;
         public int radius;
+        public long moveTime;
 
-        public static DataEventArgsAPI CreateDataEventArgs(PositionOfBall positionOfBall, SpeedOfBall speedOfBall, int radius)
+        public static DataEventArgsAPI CreateDataEventArgs(PositionOfBall positionOfBall, SpeedOfBall speedOfBall, int radius, long moveTime)
         {
-            return new DataEventArgs(positionOfBall, speedOfBall, radius);
+            return new DataEventArgs(positionOfBall, speedOfBall, radius, moveTime);
         }
     }
 }

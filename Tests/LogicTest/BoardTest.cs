@@ -42,10 +42,6 @@ namespace DataTest
                 _speed = new Vector2(x, y);
             }
 
-            public override object GetLockedObject()
-            {
-                return lockedObject;
-            }
 
             public DataBallForTest()
             {

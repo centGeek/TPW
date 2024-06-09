@@ -20,21 +20,12 @@ namespace PresentationModel
 
         public override List<BallModelAPI> GetBallsModel()
         {
-            //_ballsModel.Clear();    //Na wszelki wypadke
-            //foreach (LogicBallAPI logicBall in _logicAPI.getBalls())
-            //{
-            //    BallModelAPI ballModel = BallModelAPI.CreateBallModel(logicBall.X, logicBall.Y, logicBall.R);
-            //    _ballsModel.Add(ballModel);
-            //    logicBall.changedPosition += ballModel.UpdateBallModel!;
-            //}
-            //return _ballsModel;
-
             return _ballsModel;
         }
 
         public override void StartSimulation()
         {
-            _logicAPI.addBalls(_numOfBalls, 20);
+            _logicAPI.addBalls(_numOfBalls, 11);
             foreach (LogicBallAPI logicBall in _logicAPI.getBalls())
             {
                 BallModelAPI ballModelAPI = BallModelAPI.CreateBallModel(logicBall, _scale);

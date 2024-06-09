@@ -31,6 +31,7 @@ namespace DataTest
             Assert.AreEqual(11, ball.getSpeed().Y);
             Assert.AreEqual(10, ball.getSpeed().X);
             Assert.AreEqual(6, ball.getR());
+            ball.IsMoving = false;
         }
     }
 }
